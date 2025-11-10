@@ -32,11 +32,6 @@ in
     source = create_symlink "${dotfiles}/alacritty/";
     recursive = true;
   };
-  # home.file = {
-  #  ".config/qtile" = {
-		#  source = config.lib.file.mkOutOfStoreSymlink "/home/aaron/nixos-dotfiles/config/qtile";
-		#  };
-	#};
 
   home.packages = with pkgs; [
     neovim
@@ -48,6 +43,7 @@ in
     fastfetch
     libreoffice
     geeqie
+    nm-applet
   ];
 
 }
