@@ -45,6 +45,7 @@ in
     geeqie
     networkmanagerapplet
     pavucontrol
+    rpcs3
   ];
 
 }
