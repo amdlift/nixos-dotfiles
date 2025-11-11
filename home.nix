@@ -44,6 +44,7 @@ in
     libreoffice
     geeqie
     networkmanagerapplet
+    pavucontrol
   ];
 
 }
