@@ -43,7 +43,7 @@ in
     fastfetch
     libreoffice
     geeqie
-    nm-applet
+    networkmanagerapplet
   ];
 
 }
