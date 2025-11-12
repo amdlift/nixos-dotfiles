@@ -46,6 +46,12 @@ in
     networkmanagerapplet
     pavucontrol
     rpcs3
+    p7zip
   ];
 
+  services.udiskie = {
+    enable = true;
+    settings = {
+    };
+  };
 }

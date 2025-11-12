@@ -16,6 +16,8 @@
 
   time.timeZone = "America/Chicago";
 
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
   services.pulseaudio.enable = false;
   
   services.pipewire = {
@@ -38,6 +40,8 @@
 
   services.libinput.enable = true;
 
+  services.udisks2.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.aaron = {
     isNormalUser = true;
@@ -51,6 +55,18 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
+  
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+  };
+
+
   environment.systemPackages = with pkgs; [
     vim
     wget
@@ -59,6 +75,7 @@
     rofi
     unzip
     brightnessctl
+    distrobox
   ];
 
   fonts.packages = with pkgs; [
