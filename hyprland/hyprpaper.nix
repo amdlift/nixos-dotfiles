@@ -6,8 +6,8 @@
     settings = {
       splash = false;
       wallpaper = {
-        monitor = "eDP-2";
-        path = "~/nixos-dotfiles/hyprpaper/wallpapers/landscape2_day.png";
+        monitor = "";
+        path = "~/nixos-dotfiles/wallpapers/landscape2_day.png";
       };
     };
   };

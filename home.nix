@@ -2,13 +2,13 @@
 
 {
   imports = [
-    ./hyprland.nix
-    ./waybar.nix
-    ./hyprpaper.nix
-    ./hyprlock.nix
+    .hyprland/hyprland.nix
+    .hyprland/waybar.nix
+    .hyprland/hyprpaper.nix
+    .hyprland/hyprlock.nix
     ./ghostty.nix
     ./hyprlauncher.nix
-    ./hypridle.nix
+    .hyprland/hypridle.nix
     ./yazi.nix
   ];
 
