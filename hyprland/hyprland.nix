@@ -44,10 +44,10 @@
         "ALT, M, togglespecialworkspace, jellyfin"
 
         # Dark mode
-        "ALT, D, exec, hyprctl hyprpaper wallpaper 'eDP-2, ~/nixos-dotfiles/hyprpaper/wallpapers/landscape2_night.png'"
+        "ALT, D, exec, hyprctl hyprpaper wallpaper 'eDP-2, ~/nixos-dotfiles/wallpapers/landscape2_night.png'"
 
         # Light mode
-        "ALT, L, exec, hyprctl hyprpaper wallpaper 'eDP-2, ~/nixos-dotfiles/hyprpaper/wallpapers/landscape2_day.png'"
+        "ALT, L, exec, hyprctl hyprpaper wallpaper 'eDP-2, ~/nixos-dotfiles/wallpapers/landscape2_day.png'"
       ]
       ++ (
         # workspaces
