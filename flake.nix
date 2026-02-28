@@ -11,14 +11,14 @@
     nixosConfigurations.aaronix = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        ./configuration.nix
+        ./aaronix/configuration.nix
         ./aaronix/nvidia.nix
         home-manager.nixosModules.home-manager
         {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            users.aaron = import ./home.nix;
+            users.aaron = import ./aaronix/home.nix;
             backupFileExtension = "bak";
           };
         }

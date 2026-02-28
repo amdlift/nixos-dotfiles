@@ -7,7 +7,7 @@
       splash = false;
       wallpaper = {
         monitor = "";
-        path = "~/nixos-dotfiles/wallpapers/landscape2_day.png";
+        path = "~/nixos-dotfiles/aaronix/wallpapers/landscape2_day.png";
       };
     };
   };
