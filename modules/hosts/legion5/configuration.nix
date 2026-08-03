@@ -40,6 +40,7 @@
     ];
 
     nixpkgs.config.allowUnfreePackages = [
+      "claude-code"
       "vivaldi"
     ];
 
