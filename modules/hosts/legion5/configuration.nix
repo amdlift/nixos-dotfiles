@@ -1,57 +1,52 @@
-{ lib, self, inputs, ... }: {
+{ self, inputs, ... }:
+{
   flake.nixosConfigurations.legion5 = inputs.nixpkgs.lib.nixosSystem {
-    modules = [
-      self.nixosModules.legion5Module
-      self.nixosModules.legion5Hardware
-      self.nixosModules.legion5Nvidia
-      self.nixosModules.myHomeManager
-    ];
+    modules = [ self.nixosModules.legion5 ];
   };
 
-  flake.nixosModules.legion5Module = { pkgs, ... }: {
-    imports = [
-      self.nixosModules.desktop
-      self.nixosModules.ly
-      self.nixosModules.mango
-      self.nixosModules.stylix
-      self.nixosModules.waybar
-    ];
+  flake.modules.nixos.legion5 =
+    { pkgs, ... }:
+    {
+      imports = with self.nixosModules; [
+        desktop
 
-    # Fixes brightness device
-    boot.kernelParams = [
-      "amdgpu.backlight=0"
-    ];
+        # software this host wants
+        foot
+        ly
+        mango
+        rofi
+        stylix
+        wallpaper
+        waybar
 
-    networking.hostName = "legion5";
+        # who lives here
+        aaron
 
-    environment.systemPackages = with pkgs; [
-      abcde
-      brightnessctl
-      btop-cuda
-      claude-code
-      foot
-      git
-      rofi
-      swaybg
-      thunderbird
-      vivaldi
-      vscodium
-      wget
-    ];
+        # this machine's own facts
+        legion5-hardware
+        legion5-monitors
+        legion5-nvidia
+      ];
 
-    nixpkgs.config.allowUnfreePackages = [
-      "claude-code"
-      "vivaldi"
-    ];
+      networking.hostName = "legion5";
 
-    users.users.aaron = {
-      isNormalUser = true;
-      shell = pkgs.bash;
-      extraGroups = [ "networkmanager" "wheel" "docker" "dialout" ];
-      packages = with pkgs; [];
+      # Fixes brightness device
+      boot.kernelParams = [ "amdgpu.backlight=0" ];
+
+      environment.systemPackages = with pkgs; [
+        abcde
+        btop-cuda
+        claude-code
+        git
+        thunderbird
+        vivaldi
+        vscodium
+        wget
+      ];
+
+      nixpkgs.config.allowUnfreePackages = [
+        "claude-code"
+        "vivaldi"
+      ];
     };
-
-    home-manager.users.aaron = self.homeModules.aaronModule;
-  };
-
 }

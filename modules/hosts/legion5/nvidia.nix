@@ -1,13 +1,16 @@
-{ lib, ... }: {
-  flake.nixosModules.legion5Nvidia = {
-    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+{
+  flake.modules.nixos.legion5-nvidia = {
+    nixpkgs.config.allowUnfreePackages = [
       "nvidia-x11"
       "nvidia-settings"
       "nvidia-persistenced"
     ];
 
     hardware.graphics.enable = true;
-    services.xserver.videoDrivers = [ "amdgpu" "nvidia" ];
+    services.xserver.videoDrivers = [
+      "amdgpu"
+      "nvidia"
+    ];
     hardware.nvidia.open = true;
 
     hardware.nvidia.prime = {

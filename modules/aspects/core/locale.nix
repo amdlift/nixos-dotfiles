@@ -1,11 +1,5 @@
-{ self, inputs, ... }: {
-  flake.nixosModules.minimal = {
-    imports = [
-      self.nixosModules.bootloader
-      self.nixosModules.networking
-      self.nixosModules.ssh
-    ];
-
+{
+  flake.modules.nixos.locale = {
     time.timeZone = "America/Chicago";
 
     i18n.defaultLocale = "en_US.UTF-8";
@@ -21,8 +15,5 @@
       LC_TELEPHONE = "en_US.UTF-8";
       LC_TIME = "en_US.UTF-8";
     };
-
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
-    system.stateVersion = "25.11";
   };
 }

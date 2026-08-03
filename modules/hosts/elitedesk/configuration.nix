@@ -1,28 +1,27 @@
-{ self, inputs, ... }: {
+{ self, inputs, ... }:
+{
   flake.nixosConfigurations.elitedesk = inputs.nixpkgs.lib.nixosSystem {
-    modules = [
-      self.nixosModules.elitedeskModule
-      self.nixosModules.elitedeskHardware
-      self.nixosModules.myHomeManager
-    ];
+    modules = [ self.nixosModules.elitedesk ];
   };
 
-  flake.nixosModules.elitedeskModule = { pkgs, ... }: {
-    imports = [
-      self.nixosModules.minimal
-    ];
+  flake.modules.nixos.elitedesk =
+    { pkgs, ... }:
+    {
+      imports = with self.nixosModules; [
+        minimal
 
-    environment.systemPackages = with pkgs; [
-      git
-      wget
-    ];
+        # who lives here
+        aaron
 
-    users.users.aaron = {
-      isNormalUser = true;
-      shell = pkgs.bash;
-      extraGroups = [ "networkmanager" "wheel" "docker" "dialout" ];
+        # this machine's own facts
+        elitedesk-hardware
+      ];
+
+      networking.hostName = "elitedesk";
+
+      environment.systemPackages = with pkgs; [
+        git
+        wget
+      ];
     };
-    home-manager.users.aaron = self.homeModules.aaronModule;
-  };
-
 }

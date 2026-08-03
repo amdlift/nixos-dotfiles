@@ -1,5 +1,5 @@
 {
-  flake.homeModules.aaronWaybar = {
+  flake.modules.homeManager.aaron = {
     programs.waybar.settings.main = {
       layer = "top";
       position = "top";
@@ -23,15 +23,15 @@
       "mango/workspaces" = {
         format = "{icon}";
         format-icons = {
-          active = "";
-          default = "";
-          urgent = "";
-          empty = "";
+          active = "";
+          default = "";
+          urgent = "";
+          empty = "";
         };
-        
+
         on-click = "activate";
         on-click-right = "toggle";
-        overview-label = "";
+        overview-label = "";
       };
     };
   };
