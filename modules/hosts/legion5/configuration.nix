@@ -11,6 +11,8 @@
         desktop
 
         # software this host wants
+        btop-cuda
+        docker
         foot
         ly
         mango
@@ -35,7 +37,6 @@
 
       environment.systemPackages = with pkgs; [
         abcde
-        btop-cuda
         claude-code
         git
         thunderbird

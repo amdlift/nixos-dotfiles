@@ -10,6 +10,9 @@
       imports = with self.nixosModules; [
         minimal
 
+        # software this host wants
+        btop-cuda
+
         # who lives here
         aaron
 
