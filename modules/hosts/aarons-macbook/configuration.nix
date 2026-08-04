@@ -26,5 +26,9 @@
       gh
       logseq
     ];
+
+    nixpkgs.config.allowUnfreePackages = [
+      "claude-code"
+    ];
   };
 }
