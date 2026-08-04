@@ -26,7 +26,7 @@
       gh
       logseq
       nodejs_22
-      nodePackages.aws-cdk
+      aws-cdk-cli
     ];
 
     nixpkgs.config.allowUnfreePackages = [
