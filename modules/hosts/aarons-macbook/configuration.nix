@@ -25,6 +25,7 @@
       claude-code
       gh
       logseq
+      nodejs_22
     ];
 
     nixpkgs.config.allowUnfreePackages = [
