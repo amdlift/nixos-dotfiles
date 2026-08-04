@@ -1,0 +1,23 @@
+{ self, inputs, ... }:
+{
+  flake.darwinConfigurations.aarons-macbook = inputs.nix-darwin.lib.darwinSystem {
+    modules = [ self.darwinModules.aarons-macbook ];
+  };
+
+  flake.modules.darwin.aarons-macbook = {
+    imports = with self.darwinModules; [
+      minimal
+
+      # software this host wants
+      btop
+
+      # who lives here
+      aaron
+
+      # this machine's own facts
+      aarons-macbook-hardware
+    ];
+
+    networking.hostName = "aarons-macbook";
+  };
+}

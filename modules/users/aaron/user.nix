@@ -21,12 +21,21 @@
       home-manager.users.aaron = self.homeModules.aaron;
     };
 
-  # macOS owns the account itself, so this only tells nix-darwin where the home
-  # lives and which user the system-level activation acts on.
-  flake.modules.darwin.aaron = {
-    users.users.aaron.home = "/Users/aaron";
-    system.primaryUser = "aaron";
+  # macOS owns the account itself (SSO-managed) and its login name is
+  # `aaron.davis`, which cannot be changed. Only the entity layer knows that:
+  # home-manager derives `home.username` from `users.users.<name>.name` and
+  # `home.homeDirectory` from `users.users.<name>.home`, so keying it under the
+  # macOS account while handing it the same class-agnostic `homeModules.aaron`
+  # makes the two accounts one user as far as his configuration is concerned.
+  flake.modules.darwin.aaron =
+    let
+      # dotted string is a single attribute name, not a nested path
+      account = "aaron.davis";
+    in
+    {
+      users.users.${account}.home = "/Users/${account}";
+      system.primaryUser = account;
 
-    home-manager.users.aaron = self.homeModules.aaron;
-  };
+      home-manager.users.${account} = self.homeModules.aaron;
+    };
 }
