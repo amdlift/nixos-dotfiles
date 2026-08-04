@@ -27,6 +27,7 @@
       gh
       logseq
       aws-cdk-cli
+      ripgrep
     ];
 
     nixpkgs.config.allowUnfreePackages = [
