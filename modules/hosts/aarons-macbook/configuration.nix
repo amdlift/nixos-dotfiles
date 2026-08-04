@@ -10,6 +10,7 @@
 
       # software this host wants
       btop
+      nodejs # node@22 via homebrew, not nixpkgs
 
       # who lives here
       aaron
@@ -25,7 +26,6 @@
       claude-code
       gh
       logseq
-      nodejs_22
       aws-cdk-cli
     ];
 
