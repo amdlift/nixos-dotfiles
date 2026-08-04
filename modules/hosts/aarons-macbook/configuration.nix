@@ -21,6 +21,7 @@
     networking.hostName = "aarons-macbook";
 
     environment.systemPackages = with pkgs; [
+      aws-cdk
       awscli2
       claude-code
       gh
