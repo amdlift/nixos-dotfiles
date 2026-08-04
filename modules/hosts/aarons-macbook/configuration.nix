@@ -21,12 +21,12 @@
     networking.hostName = "aarons-macbook";
 
     environment.systemPackages = with pkgs; [
-      aws-cdk
       awscli2
       claude-code
       gh
       logseq
       nodejs_22
+      nodePackages.aws-cdk
     ];
 
     nixpkgs.config.allowUnfreePackages = [
