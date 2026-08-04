@@ -4,7 +4,7 @@
     modules = [ self.darwinModules.aarons-macbook ];
   };
 
-  flake.modules.darwin.aarons-macbook = {
+  flake.modules.darwin.aarons-macbook = { pkgs, ... }: {
     imports = with self.darwinModules; [
       minimal
 
