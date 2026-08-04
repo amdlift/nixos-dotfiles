@@ -19,5 +19,12 @@
     ];
 
     networking.hostName = "aarons-macbook";
+
+    environment.systemPackages = with pkgs; [
+      awscli2
+      claude-code
+      gh
+      logseq
+    ];
   };
 }
