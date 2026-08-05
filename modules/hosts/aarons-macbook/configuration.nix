@@ -12,6 +12,7 @@
       btop
       nodejs
       displaylink
+      omniwm
 
       # who lives here
       aaron

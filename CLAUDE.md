@@ -59,7 +59,10 @@ modules/
   profiles/    minimal.nix (nixos + darwin), desktop.nix — bundles of aspects
   hosts/       legion5/, elitedesk/, aarons-macbook/ — machine facts + aspects to enable
   users/aaron/ how aaron configures software, one file per aspect
+pkgs/          vendored package derivations (NOT flake-parts modules)
 ```
+
+**`import-tree` imports every `.nix` file under `modules/` as a flake-parts module**, so anything that is not one — a `callPackage`-style derivation, a bare home-manager module — must live outside that tree. `pkgs/omniwm.nix` is there for exactly that reason; putting it under `modules/` would fail with a module-system error about unsupported attributes.
 
 - **Aspect** — one feature, spanning classes. `flake.modules.nixos.<name>`, `flake.modules.darwin.<name>` and `flake.modules.homeManager.<name>` may all be set in the same file.
 - **Profile** — `minimal` is defined for *both* system classes in one file; `desktop` (= minimal + audio + bluetooth + xkb) is NixOS-only.
@@ -153,7 +156,7 @@ Consequences when editing:
 
 - **Never put `.enable` in `modules/users/`.** Enablement belongs in an aspect.
 - **Never put user preferences in an aspect.** An aspect may set enablement, system dependencies, and non-opinionated defaults — not keybinds, colors or layouts.
-- **A user module configuring a third-party program must import that program's HM module.** Built-in home-manager options (`programs.waybar`, `programs.foot`, `programs.bash`) always exist, so nothing is needed. Mango's do not: `modules/users/aaron/mango.nix` imports `self.homeModules.mango`, which is an options-only module (`flake.modules.homeManager.mango` in `aspects/desktop/mango.nix` imports the upstream HM module but sets no `enable`). Without that import, configuring mango on a host lacking the aspect is an *undeclared option error*, not a no-op.
+- **A user module configuring a third-party program must import that program's HM module.** Built-in home-manager options (`programs.waybar`, `programs.foot`, `programs.bash`) always exist, so nothing is needed. Mango's and OmniWM's do not: `modules/users/aaron/mango.nix` imports `self.homeModules.mango` and `modules/users/aaron/omniwm.nix` imports `self.homeModules.omniwm`. Both are options-only modules that declare the program's options but set no `enable`. Without that import, configuring either on a host lacking the aspect is an *undeclared option error*, not a no-op. Import the options module from **one** place only — the aspect's system half injects just `enable = true`, never the options module, or it would be imported twice.
 - **Aspects carry their own dependencies.** `aspects/desktop/mango.nix` provides `brightnessctl` and `swaybg` because its binds and autostart use them; `aspects/desktop/rofi.nix` provides `rofi` for the launcher bind. Don't add these to a host's `environment.systemPackages`.
 - **Package variants are separate aspects that refine the base**, not a second copy of it. `flake.modules.nixos.btop-cuda` in `aspects/tools/btop.nix` does `imports = [ self.nixosModules.btop ]` and then overrides `programs.btop.package`, so a host imports exactly one of `btop` / `btop-cuda` and enablement is never stated twice.
 - **Host-specific data goes in the host.** `hosts/legion5/monitors.nix` owns `monitorrule` (the `eDP-2`/`HDMI-A-1` panels) and the `amdgpu_bl2` brightness binds, injected via `home-manager.sharedModules`. Mango's `settings.bind` is a list and definitions **concatenate**, so a host may append binds to a user's set (verified: 71 user + 2 host = 73).
