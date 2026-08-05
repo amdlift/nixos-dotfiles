@@ -29,6 +29,7 @@
       logseq
       aws-cdk-cli
       ripgrep
+      vscodium
     ];
 
     nixpkgs.config.allowUnfreePackages = [
