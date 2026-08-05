@@ -10,7 +10,8 @@
 
       # software this host wants
       btop
-      nodejs # node@22 via homebrew, not nixpkgs
+      nodejs
+      displaylink
 
       # who lives here
       aaron
