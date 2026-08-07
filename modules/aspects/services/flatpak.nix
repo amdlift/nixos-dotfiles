@@ -17,7 +17,7 @@
   #
   # `remotes` already defaults to flathub, so nothing needs declaring for it.
   flake.modules.nixos.flatpak =
-    { pkgs, ... }:
+    { lib, pkgs, ... }:
     {
       imports = [ inputs.nix-flatpak.nixosModules.nix-flatpak ];
 
@@ -34,5 +34,15 @@
       # mango already does, but elitedesk has no window manager at all.
       xdg.portal.enable = true;
       xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+
+      # Since xdg-desktop-portal 1.17, enabling portals without saying which
+      # backend serves which interface warns. Name the backend this aspect
+      # itself ships as the fallback, rather than the `"*"` escape hatch that
+      # just picks the first implementation lexicographically.
+      #
+      # This is only the `common` fallback section, used when no desktop-specific
+      # section matches. legion5 is unaffected: mango contributes its own
+      # `config.mango` (plus `configPackages`), which wins under a mango session.
+      xdg.portal.config.common.default = lib.mkDefault [ "gtk" ];
     };
 }
