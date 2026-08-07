@@ -12,6 +12,7 @@
 
         # software this host wants
         btop-cuda
+        flatpak
 
         # who lives here
         aaron
@@ -26,5 +27,8 @@
         git
         wget
       ];
+
+      # This host's own flatpaks, independent of any other host's.
+      services.flatpak.packages = [ ];
     };
 }

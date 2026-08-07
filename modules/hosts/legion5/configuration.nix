@@ -13,6 +13,7 @@
         # software this host wants
         btop-cuda
         docker
+        flatpak
         foot
         ly
         mango
@@ -51,5 +52,8 @@
         "claude-code"
         "vivaldi"
       ];
+
+      # This host's own flatpaks, independent of any other host's.
+      services.flatpak.packages = [ ];
     };
 }
