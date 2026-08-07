@@ -38,7 +38,9 @@
       environment.systemPackages = with pkgs; [
         abcde
         claude-code
+        gh
         git
+        nodejs_22
         thunderbird
         vivaldi
         vscodium
