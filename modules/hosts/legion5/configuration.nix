@@ -15,6 +15,7 @@
         docker
         flatpak
         foot
+        gaming
         ly
         mango
         rofi
@@ -39,8 +40,10 @@
       environment.systemPackages = with pkgs; [
         abcde
         claude-code
+        eden
         gh
         git
+        mcp-nixos
         nodejs_22
         thunderbird
         vivaldi
@@ -54,6 +57,8 @@
       ];
 
       # This host's own flatpaks, independent of any other host's.
-      services.flatpak.packages = [ ];
+      services.flatpak.packages = [
+        "org.vinegarhq.Sober"
+      ];
     };
 }
