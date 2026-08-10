@@ -12,6 +12,7 @@
       btop
       nodejs
       displaylink
+      docker
       omniwm
 
       # who lives here
