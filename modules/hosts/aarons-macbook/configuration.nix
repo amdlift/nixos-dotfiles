@@ -14,6 +14,7 @@
       cursor
       displaylink
       docker
+      ollama
       omniwm
 
       # who lives here
