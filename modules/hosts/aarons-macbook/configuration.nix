@@ -11,6 +11,7 @@
       # software this host wants
       btop
       nodejs
+      cursor
       displaylink
       docker
       omniwm
