@@ -20,6 +20,7 @@
         mango
         rofi
         stylix
+        usb
         wallpaper
         waybar
 
