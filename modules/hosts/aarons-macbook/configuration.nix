@@ -11,7 +11,10 @@
       # software this host wants
       btop
       nodejs
+      cursor
       displaylink
+      docker
+      ollama
       omniwm
 
       # who lives here
