@@ -644,11 +644,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1785399078,
-        "narHash": "sha256-qquPn4ibBnc7gA4peGgseP+lKGRq58UPxsMTSrdUT8Q=",
+        "lastModified": 1786743247,
+        "narHash": "sha256-grYWj1RHrkhM0NCIymTsZyObuQsCVf1kuzLaThwMxvc=",
         "owner": "Alexays",
         "repo": "Waybar",
-        "rev": "d44a27af1023b5c68f6f61435ba550bf03f69938",
+        "rev": "09e69e0f48214a1128d62417612bc47e8dc9e36a",
         "type": "github"
       },
       "original": {
