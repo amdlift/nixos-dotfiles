@@ -13,6 +13,7 @@
         # software this host wants
         btop-cuda
         docker
+        dunst
         flatpak
         foot
         gaming
@@ -40,12 +41,15 @@
 
       environment.systemPackages = with pkgs; [
         abcde
+        blender
         claude-code
+        discord
         eden
         gh
         git
         mcp-nixos
         nodejs_22
+        quickemu
         thunderbird
         vivaldi
         vscodium
@@ -54,6 +58,7 @@
 
       nixpkgs.config.allowUnfreePackages = [
         "claude-code"
+        "discord"
         "vivaldi"
       ];
 
