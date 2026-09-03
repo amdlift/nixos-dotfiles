@@ -16,6 +16,7 @@
       ];
 
       modules-right = [
+        "pulseaudio"
         "network"
         "battery"
       ];
@@ -34,6 +35,23 @@
 
         on-click = "activate";
         on-click-right = "toggle";
+      };
+
+      # Follows the default sink, so it tracks whichever output is active.
+      # Glyphs are BMP for the same reason as the workspace pips above.
+      "pulseaudio" = {
+        format = "{icon} {volume}%";
+        format-muted = "✕ {volume}%";
+        format-icons = {
+          headphone = "♫";
+          headset = "♫";
+          default = "♪";
+        };
+
+        tooltip-format = "{desc}";
+        scroll-step = 5;
+        max-volume = 100;
+        on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
       };
     };
 

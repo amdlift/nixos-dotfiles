@@ -266,6 +266,13 @@
           "CTRL+ALT,Down,resizewin,+0,+50"
           "CTRL+ALT,Left,resizewin,-50,+0"
           "CTRL+ALT,Right,resizewin,+50,+0"
+
+          # audio — wpctl resolves the @DEFAULT_*@ tokens per invocation, so
+          # these follow the active device instead of pinning one sink.
+          "NONE,XF86AudioRaiseVolume,spawn,wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+"
+          "NONE,XF86AudioLowerVolume,spawn,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+          "NONE,XF86AudioMute,spawn,wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+          "NONE,XF86AudioMicMute,spawn,wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
         ];
 
         # ---- Mouse button bindings ----
