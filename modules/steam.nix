@@ -1,7 +1,10 @@
 { den, ... }: {
   den.aspects.steam = {
     includes = [
-      (den._.unfree [ "steam" "steam-unwrapped" ])
+      (den._.unfree [
+        "steam"
+        "steam-unwrapped"
+      ])
     ];
 
     nixos.programs.steam = {

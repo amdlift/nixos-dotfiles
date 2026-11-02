@@ -7,7 +7,7 @@
   };
 
   den.aspects.mango.nixos = {
-    imports = [inputs.mangowm.nixosModules.mango];
+    imports = [ inputs.mangowm.nixosModules.mango ];
     programs.mango.enable = true;
   };
 }

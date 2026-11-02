@@ -40,10 +40,11 @@
         vpn.enable = true;
 
         peerPort = 40083;
-  
+
         extraConfig = {
           Preferences = {
-            "WebUI\\Password_PBKDF2" = "@ByteArray(hf/jOOjiKDh5qCCypQoT7Q==:EZoc9RnDeZCDL7qDnYeEp4swuZz7e60CaLItWah+2CJnjzQ5Mv3bGZVjkLlQjPonN8opYtpXo+kVxdLH2tQvXw==)";
+            "WebUI\\Password_PBKDF2" =
+              "@ByteArray(hf/jOOjiKDh5qCCypQoT7Q==:EZoc9RnDeZCDL7qDnYeEp4swuZz7e60CaLItWah+2CJnjzQ5Mv3bGZVjkLlQjPonN8opYtpXo+kVxdLH2tQvXw==)";
           };
         };
       };
@@ -53,7 +54,12 @@
           enable-nixarr-apps = true;
 
           # Define tags for organizing indexers
-          tags = [ "usenet" "torrent" "private" "flaresolverr" ];
+          tags = [
+            "usenet"
+            "torrent"
+            "private"
+            "flaresolverr"
+          ];
 
           indexers = [
             {
@@ -64,7 +70,10 @@
             {
               sort_name = "1337x";
               name = "1337x";
-              tags = [ "torrent" "flaresolverr" ];
+              tags = [
+                "torrent"
+                "flaresolverr"
+              ];
             }
             {
               sort_name = "nyaa si";
@@ -79,7 +88,10 @@
             {
               sort_name = "eztv";
               name = "EZTV";
-              tags = [ "torrent" "flaresolverr" ];
+              tags = [
+                "torrent"
+                "flaresolverr"
+              ];
             }
             {
               sort_name = "knaben";
@@ -109,34 +121,38 @@
 
       radarr = {
         enable = true;
-        settings-sync.downloadClients = [{
-          name = "qBittorrent";
-          implementation = "QBittorrent";
-          fields = {
-            host = "192.168.15.1";
-            port = 8085;
-            useSsl = false;
-            username = "admin";
-            password.secret = "/data/.secret/qbittorrent-password";
-            movieCategory = "radarr";
-          };
-        }];
+        settings-sync.downloadClients = [
+          {
+            name = "qBittorrent";
+            implementation = "QBittorrent";
+            fields = {
+              host = "192.168.15.1";
+              port = 8085;
+              useSsl = false;
+              username = "admin";
+              password.secret = "/data/.secret/qbittorrent-password";
+              movieCategory = "radarr";
+            };
+          }
+        ];
       };
 
       sonarr = {
         enable = true;
-        settings-sync.downloadClients = [{
-          name = "qBittorrent";
-          implementation = "QBittorrent";
-          fields = {
-            host = "192.168.15.1";
-            port = 8085;
-            useSsl = false;
-            username = "admin";
-            password.secret = "/data/.secret/qbittorrent-password";
-            tvCategory = "sonarr";
-          };
-        }];
+        settings-sync.downloadClients = [
+          {
+            name = "qBittorrent";
+            implementation = "QBittorrent";
+            fields = {
+              host = "192.168.15.1";
+              port = 8085;
+              useSsl = false;
+              username = "admin";
+              password.secret = "/data/.secret/qbittorrent-password";
+              tvCategory = "sonarr";
+            };
+          }
+        ];
       };
     };
 

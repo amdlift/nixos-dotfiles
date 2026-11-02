@@ -11,7 +11,8 @@
       den.aspects.aaron._.nvf
     ];
 
-    provides.to-hosts = { host, ... }:
+    provides.to-hosts =
+      { host, ... }:
       lib.optionalAttrs (lib.elem "desktop" (host.roles or [ ])) {
         includes = [
           den.aspects.aaron._.foot

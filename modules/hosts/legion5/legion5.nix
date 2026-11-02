@@ -20,7 +20,13 @@
       usb
       zen-browser
 
-      (den._.unfree [ "claude-code" "cuda_cccl" "cuda_cudart" "cuda_nvcc" "libcublas" ])
+      (den._.unfree [
+        "claude-code"
+        "cuda_cccl"
+        "cuda_cudart"
+        "cuda_nvcc"
+        "libcublas"
+      ])
     ];
 
     provides.aaron.user.extraGroups = [ "dialout" ];
@@ -82,7 +88,7 @@
         layout = "us";
         variant = "";
       };
-      
+
       # Nvidia config
       services.xserver.videoDrivers = [ "amdgpu" ];
       hardware.nvidia.prime = {

@@ -18,9 +18,18 @@
       opacity.terminal = 0.9;
 
       fonts = {
-        monospace = { package = pkgs.nerd-fonts.jetbrains-mono; name = "JetBrainsMono Nerd Font"; };
-        sansSerif = { package = pkgs.dejavu_fonts; name = "DejaVu Sans"; };
-        serif     = { package = pkgs.dejavu_fonts; name = "DejaVu Serif"; };
+        monospace = {
+          package = pkgs.nerd-fonts.jetbrains-mono;
+          name = "JetBrainsMono Nerd Font";
+        };
+        sansSerif = {
+          package = pkgs.dejavu_fonts;
+          name = "DejaVu Sans";
+        };
+        serif = {
+          package = pkgs.dejavu_fonts;
+          name = "DejaVu Serif";
+        };
 
         sizes = {
           popups = 13;
@@ -28,7 +37,11 @@
         };
       };
 
-      cursor = { package = pkgs.bibata-cursors; name = "Bibata-Modern-Classic"; size = 24; };
+      cursor = {
+        package = pkgs.bibata-cursors;
+        name = "Bibata-Modern-Classic";
+        size = 24;
+      };
     };
   };
 }

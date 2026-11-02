@@ -6,7 +6,8 @@
       defaultNetwork.settings.dns_enabled = true; # Required for containers under podman-compose to be able to talk to each other.
     };
 
-    users.users = lib.genAttrs (builtins.attrNames host.users)
-        (_: { extraGroups = [ "podman" ]; });
+    users.users = lib.genAttrs (builtins.attrNames host.users) (_: {
+      extraGroups = [ "podman" ];
+    });
   };
 }

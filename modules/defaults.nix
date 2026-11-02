@@ -10,8 +10,11 @@
   den.default.nixos.home-manager.backupFileExtension = "backup";
 
   # Enable flakes on every host
-  den.default.nixos.nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  
+  den.default.nixos.nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
   # Names the networking hostname of each host after its host aspect
   den.schema.host.includes = [ den.batteries.hostname ];
 }
