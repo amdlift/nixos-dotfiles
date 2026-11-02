@@ -30,6 +30,7 @@
       nix.settings.trusted-users = [ "aaron" ];
 
       environment.systemPackages = with pkgs; [
+        claude-code
         zfs
       ];
 
