@@ -1,7 +1,7 @@
 { inputs, ... }: {
   flake-file.inputs.nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
-  den.aspects.flatpak.nixos = {
+  den.aspects.flatpak.nixos = { pkgs, ... }: {
     imports = [ inputs.nix-flatpak.nixosModules.nix-flatpak ];
 
     services.flatpak = {
@@ -11,7 +11,14 @@
         onCalendar = "weekly";
       };
       # remove flatpaks you install by hand that aren't listed here:
-      # uninstallUnmanaged = true;
+      uninstallUnmanaged = true;
+    };
+
+    # Needed to use flatpak
+    xdg.portal = {
+      enable = true;
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+      config.common.default = "*";
     };
   };
 }
