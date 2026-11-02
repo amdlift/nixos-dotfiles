@@ -4,6 +4,12 @@
       den.aspects.nixarr
     ];
 
+    nixos.services = {
+      prowlarr.settings.auth.required = "DisabledForLocalAddresses";
+      sonarr.settings.auth.required = "DisabledForLocalAddresses";
+      radarr.settings.auth.required = "DisabledForLocalAddresses";
+    };
+
     nixos.nixarr = {
       mediaDir = "/zfspool/media";
       stateDir = "/zfspool/media/.state/nixarr";
@@ -169,9 +175,5 @@
         };
       };
     };
-
-    services.prowlarr.settings.auth.required = "DisabledForLocalAddresses";
-    services.sonarr.settings.auth.required = "DisabledForLocalAddresses";
-    services.radarr.settings.auth.required = "DisabledForLocalAddresses";
   };
 }
