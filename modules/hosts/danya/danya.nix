@@ -11,6 +11,7 @@
       unstable
       usb
 
+      danya._.home-assistant
       danya._.immich
       danya._.nixarr
       danya._.zfs

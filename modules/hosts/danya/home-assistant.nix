@@ -1,0 +1,63 @@
+{
+  den.aspects.danya._.home-assistant.nixos = {
+    services.home-assistant = {
+      enable = true;
+      extraComponents = [
+        # Components required to complete the onboarding
+        "analytics"
+        "google_translate"
+        "matter"
+        "met"
+        "otbr"
+        "radio_browser"
+        "thread"
+        "shopping_list"
+        # Recommended for fast zlib compression
+        # https://www.home-assistant.io/integrations/isal
+        "isal"
+      ];
+
+      extraPackages = ps: with ps; [ psycopg2 ];
+
+      config = {
+        # Includes dependencies for a basic setup
+        # https://www.home-assistant.io/integrations/default_config/
+        default_config = { };
+
+        http = {
+          server_host = "::1";
+          trusted_proxies = [ "::1" ];
+          use_x_forwarded_for = true;
+        };
+
+        recorder.db_url = "postgresql://@/hass";
+      };
+    };
+
+    services.nginx = {
+      recommendedProxySettings = true;
+      virtualHosts."home.amdlift.com" = {
+        forceSSL = true;
+        enableACME = true;
+        extraConfig = ''
+          proxy_buffering off;
+        '';
+        locations."/" = {
+          proxyPass = "http://[::1]:8123";
+          proxyWebsockets = true;
+        };
+      };
+    };
+
+    services.postgresql = {
+      enable = true;
+      ensureDatabases = [ "hass" ];
+      ensureUsers = [
+        {
+          name = "hass";
+          ensureDBOwnership = true;
+        }
+      ];
+    };
+  };
+}
