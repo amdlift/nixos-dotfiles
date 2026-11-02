@@ -34,6 +34,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/stylix/release-26.05";
     };
+    treefmt-nix = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:numtide/treefmt-nix";
+    };
     waybar = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:alexays/waybar";
