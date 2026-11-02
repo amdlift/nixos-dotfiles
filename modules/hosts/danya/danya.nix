@@ -3,6 +3,7 @@
     includes = with den.aspects; [
       bluetooth
       flatpak
+      matter
       network-manager
       nvidia
       podman
@@ -18,10 +19,6 @@
 
       (den._.unfree [
         "claude-code"
-        "cuda_cccl"
-        "cuda_cudart"
-        "cuda_nvcc"
-        "libcublas"
       ])
     ];
 
