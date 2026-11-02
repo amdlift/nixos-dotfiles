@@ -50,6 +50,8 @@
       };
 
       prowlarr = {
+        enable = true;
+        openFirewall = true;
         settings-sync = {
           enable-nixarr-apps = true;
 
@@ -121,6 +123,7 @@
 
       radarr = {
         enable = true;
+        openFirewall = true;
         settings-sync.downloadClients = [
           {
             name = "qBittorrent";
@@ -139,6 +142,7 @@
 
       sonarr = {
         enable = true;
+        openFirewall = true;
         settings-sync.downloadClients = [
           {
             name = "qBittorrent";
@@ -153,6 +157,16 @@
             };
           }
         ];
+      };
+
+      seerr = {
+        enable = true;
+        openFirewall = true;
+        expose.https = {
+          enable = true;
+          acmeMail = "aaron.m.davis@comcast.net";
+          domainName = "seerr.amdlift.com";
+        };
       };
     };
 
