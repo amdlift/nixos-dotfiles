@@ -50,6 +50,13 @@
 
             max_columns = 4;
             dense_section_placement = true;
+
+            cards = [
+              {
+                type = "heading";
+                heading = "Test title";
+              }
+            ];
           }
         ];
       };
