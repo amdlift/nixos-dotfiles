@@ -34,6 +34,7 @@
         beets
         btop-cuda
         claude-code
+        podman-compose
         zfs
       ];
 
