@@ -18,7 +18,7 @@
       enableACME = true;
       forceSSL = true;
       locations."/" = {
-        proxyPass = "http://[::1]:${toString config.services.immich.port}";
+        proxyPass = "http://0.0.0.0:${toString config.services.immich.port}";
         proxyWebsockets = true;
         recommendedProxySettings = true;
         extraConfig = ''
