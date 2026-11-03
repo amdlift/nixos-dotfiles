@@ -50,6 +50,15 @@
             max_columns = 4;
             dense_section_placement = true;
 
+            header = {
+              layout = "center";
+              card = {
+                type = "markdown";
+                text_only = true;
+                content = "This is a header";
+              };
+            };
+
             sections = [
               {
                 type = "grid";
@@ -57,6 +66,7 @@
                   {
                     type = "markdown";
                     content = "# Hello {{ user }}";
+                    text_only = true;
                   }
                 ];
               }
