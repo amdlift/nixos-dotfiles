@@ -22,7 +22,7 @@
       extraPackages = ps: with ps; [ psycopg2 ];
 
       config = {
-        # Includes dependencies for a basic setup
+        # Includes  sudo ot-ctl router tabledependencies for a basic setup
         # https://www.home-assistant.io/integrations/default_config/
         default_config = { };
         homeassistant = {
@@ -44,8 +44,14 @@
         title = "Home";
         views = [
           {
-            title = "Overview";
-            path = "overview";
+            title = "Main dashboard";
+            path = "main";
+            type = "sections";
+            
+            max_columns = 4;
+            dense_section_placement = true;
+
+            
           }
         ];
       };
