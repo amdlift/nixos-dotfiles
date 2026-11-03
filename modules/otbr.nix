@@ -1,6 +1,6 @@
 {
   den.aspects.otbr.nixos = {
-    services.openthread-border-router = {
+    services.openthread-border-router = { lib, ... }: {
       enable = true;
       backboneInterfaces = [ "eno1" ];
 
@@ -19,5 +19,7 @@
         enable = true;
       };
     };
+
+    boot.kernel.sysctl."net.ipv6.conf.all.forwarding" = lib.mkForce 1;
   };
 }
