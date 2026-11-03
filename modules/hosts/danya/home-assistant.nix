@@ -55,9 +55,19 @@
               card = {
                 type = "markdown";
                 text_only = true;
-                content = "This is a header";
+                content = "# Hello, {{ user }}";
               };
             };
+
+            badges = [
+              {
+                type = "entity";
+                entity = "weather.forecast_home";
+                name = "Outside";
+                show_icon = true;
+                state_content = [ "state" "temperature" ];
+              }
+            ];
 
             sections = [
               {
