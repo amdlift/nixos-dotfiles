@@ -23,6 +23,9 @@
         # Includes dependencies for a basic setup
         # https://www.home-assistant.io/integrations/default_config/
         default_config = { };
+        homeassistant = {
+
+        };
 
         http = {
           server_host = "::1";
@@ -31,6 +34,16 @@
         };
 
         recorder.db_url = "postgresql://@/hass";
+      };
+
+      lovelaceConfig = {
+        title = "Home";
+        views = [
+          {
+            title = "Overview";
+            path = "overview";
+          }
+        ];
       };
     };
 
