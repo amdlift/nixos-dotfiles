@@ -47,11 +47,9 @@
             title = "Main dashboard";
             path = "main";
             type = "sections";
-            
+
             max_columns = 4;
             dense_section_placement = true;
-
-            
           }
         ];
       };
