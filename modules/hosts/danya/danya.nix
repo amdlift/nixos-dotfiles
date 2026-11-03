@@ -7,6 +7,7 @@
       matter
       network-manager
       nvidia
+      otbr
       podman
       ssh
       systemd-boot
