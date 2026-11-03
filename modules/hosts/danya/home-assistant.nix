@@ -47,14 +47,18 @@
             title = "Main dashboard";
             path = "main";
             type = "sections";
-
             max_columns = 4;
             dense_section_placement = true;
 
-            cards = [
+            sections = [
               {
-                type = "heading";
-                heading = "Test title";
+                type = "grid";
+                cards = [
+                  {
+                    type = "heading";
+                    heading = "Test title";
+                  }
+                ];
               }
             ];
           }
