@@ -2,6 +2,7 @@
   den.aspects.danya = {
     includes = with den.aspects; [
       bluetooth
+      byparr
       flatpak
       matter
       network-manager
