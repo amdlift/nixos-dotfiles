@@ -1,6 +1,6 @@
 {
-  den.aspects.otbr.nixos = {
-    services.openthread-border-router = { lib, ... }: {
+  den.aspects.otbr.nixos = { lib, ... }: {
+    services.openthread-border-router = {
       enable = true;
       backboneInterfaces = [ "eno1" ];
 
