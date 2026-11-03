@@ -17,6 +17,7 @@
       danya._.home-assistant
       danya._.immich
       danya._.nixarr
+      danya._.opengym
       danya._.zfs
 
       (den._.unfree [
