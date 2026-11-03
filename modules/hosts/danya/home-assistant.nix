@@ -1,7 +1,9 @@
-{
-  den.aspects.danya._.home-assistant.nixos = {
+{ den, ... }: {
+  den.aspects.danya._.home-assistant.includes = [ den.aspects.unstable ];
+  den.aspects.danya._.home-assistant.nixos = { pkgs, ... }: {
     services.home-assistant = {
       enable = true;
+      package = pkgs.unstable.home-assistant;
       extraComponents = [
         # Components required to complete the onboarding
         "analytics"
