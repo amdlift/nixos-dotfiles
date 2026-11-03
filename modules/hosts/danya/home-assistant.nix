@@ -55,8 +55,8 @@
                 type = "grid";
                 cards = [
                   {
-                    type = "heading";
-                    heading = "Test title";
+                    type = "markdown";
+                    content = "# Hello {{ user }}";
                   }
                 ];
               }
