@@ -28,6 +28,7 @@
       nix.settings.trusted-users = [ "aaron" ];
 
       environment.systemPackages = with pkgs; [
+        beets
         claude-code
         zfs
       ];
