@@ -26,7 +26,9 @@
         # https://www.home-assistant.io/integrations/default_config/
         default_config = { };
         homeassistant = {
-
+          name = "Home";
+          unit_system = "us_customary";
+          time_zone = "America/Chicago";
         };
 
         http = {
