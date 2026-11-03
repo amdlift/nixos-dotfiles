@@ -30,6 +30,7 @@
 
       environment.systemPackages = with pkgs; [
         beets
+        btop-cuda
         claude-code
         zfs
       ];
