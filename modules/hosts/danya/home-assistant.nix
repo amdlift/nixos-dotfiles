@@ -93,9 +93,9 @@
                       columns = 3;
                       rows = 2;
                     };
-                    tap-action = {
+                    tap_action = {
                       action = "navigate";
-                      navigation_path = "/nixos-lovelace/main";
+                      navigation_path = "/nixos-lovelace/light-view";
                     };
                   }
                   {
