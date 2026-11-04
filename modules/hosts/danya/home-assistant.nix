@@ -70,7 +70,10 @@
                 entity = "weather.forecast_home";
                 name = "Outside";
                 show_icon = true;
-                state_content = [ "state" "temperature" ];
+                state_content = [
+                  "state"
+                  "temperature"
+                ];
               }
             ];
 
@@ -86,7 +89,34 @@
                     hide_state = true;
                     vertical = true;
                     color = "amber";
-                    grid_options = { columns = 3; rows = 2; };
+                    grid_options = {
+                      columns = 3;
+                      rows = 2;
+                    };
+                  }
+                  {
+                    type = "button";
+                    entity = "light.aarons_bedroom_aarons_bedroom_ceiling_fan_light";
+                    name = " ";
+                    icon = "mdi:shield-home";
+                    hide_state = true;
+                    vertical = true;
+                    grid_options = {
+                      columns = 3;
+                      rows = 2;
+                    };
+                  }
+                  {
+                    type = "button";
+                    entity = "light.aarons_bedroom_aarons_bedroom_ceiling_fan_light";
+                    name = " ";
+                    icon = "mdi:home-thermometer";
+                    hide_state = true;
+                    vertical = true;
+                    grid_options = {
+                      columns = 3;
+                      rows = 2;
+                    };
                   }
                 ];
               }
