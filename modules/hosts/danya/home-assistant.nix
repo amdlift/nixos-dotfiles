@@ -79,7 +79,7 @@
                 type = "grid";
                 cards = [
                   {
-                    type = "tile";
+                    type = "button";
                     entity = "light.aarons_bedroom_aarons_bedroom_ceiling_fan_light";
                     name = " ";
                     icon = "mdi:lamps";
