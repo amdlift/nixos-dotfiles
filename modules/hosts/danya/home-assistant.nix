@@ -140,6 +140,16 @@
                     entity = "light.aarons_bedroom_aarons_bedroom_ceiling_fan_light";
                     features = [ { type = "light-brightness"; } ];
                   }
+                  {
+                    type = "tile";
+                    entity = "light.ceiling_light";
+                    features = [ { type = "light-brightness"; } ];
+                  }
+                  {
+                    type = "tile";
+                    entity = "light.recessed_lights";
+                    features = [ { type = "light-brightness"; } ];
+                  }
                 ];
               }
             ];
