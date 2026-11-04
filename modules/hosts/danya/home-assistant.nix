@@ -116,7 +116,7 @@
             title = "Main dashboard";
             path = "main";
             type = "sections";
-            max_columns = 4;
+            max_columns = 1;
             dense_section_placement = true;
 
             header = {
@@ -147,7 +147,7 @@
                 cards = [
                   {
                     type = "button";
-                    entity = "light.aarons_bedroom_aarons_bedroom_ceiling_fan_light";
+                    entity = "light.aarons_bedroom_ceiling_fan_light";
                     icon = "mdi:lamps";
                     show_name = false;
                     show_state = false;
@@ -168,7 +168,7 @@
                   }
                   {
                     type = "button";
-                    entity = "light.aarons_bedroom_aarons_bedroom_ceiling_fan_light";
+                    entity = "light.aarons_bedroom_ceiling_fan_light";
                     icon = "mdi:home-thermometer";
                     show_name = false;
                     show_state = false;
@@ -189,7 +189,7 @@
                   }
                   {
                     type = "button";
-                    entity = "light.aarons_bedroom_aarons_bedroom_ceiling_fan_light";
+                    entity = "light.aarons_bedroom_ceiling_fan_light";
                     icon = "mdi:shield-home";
                     show_name = false;
                     show_state = false;
@@ -210,6 +210,22 @@
                   }
                 ];
               }
+              {
+                type = "grid";
+                cards = [
+                  {
+                    type = "heading";
+                    heading = "Rooms";
+                  }
+                  {
+                    type = "tile";
+                    entity = "light.aarons_bedroom_ceiling_fan_light";
+                    icon = "mdi:ceiling-fan-light";
+                    name = "Aaron's Bedroom";
+                    show_state = false;
+                  }
+                ];
+              }
             ];
           }
           {
@@ -225,7 +241,7 @@
                 cards = [
                   {
                     type = "tile";
-                    entity = "light.aarons_bedroom_aarons_bedroom_ceiling_fan_light";
+                    entity = "light.aarons_bedroom_ceiling_fan_light";
                     features = [ { type = "light-brightness"; } ];
                   }
                   {
