@@ -282,6 +282,19 @@
             subview = true;
             back_path = "/nixos-lovelace/main";
 
+            sections = [
+              {
+                type = "grid";
+              }
+            ];
+          }
+          {
+            title = "Aaron's Bedroom View";
+            path = "aarons-bedroom-view";
+            type = "sections";
+            subview = true;
+            back_path = "/nixos-lovelace/main";
+
             header = {
               layout = "center";
               card = {
@@ -311,19 +324,6 @@
                 ];
               }
             ];
-
-            sections = [
-              {
-                type = "grid";
-              }
-            ];
-          }
-          {
-            title = "Aaron's Bedroom View";
-            path = "aarons-bedroom-view";
-            type = "sections";
-            subview = true;
-            back_path = "/nixos-lovelace/main";
 
             sections = [
               {
