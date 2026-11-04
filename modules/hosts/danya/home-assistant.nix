@@ -228,6 +228,17 @@
                       navigation_path = "/nixos-lovelace/aarons-bedroom-view";
                     };
                   }
+                  {
+                    type = "tile";
+                    entity = "light.ceiling_light";
+                    icon = "mdi:ceiling-fan-light";
+                    name = "Foyer";
+                    show_state = false;
+                    tap_action = {
+                      action = "navigate";
+                      navigation_path = "/nixos-lovelace/foyer-view";
+                    };
+                  }
                 ];
               }
             ];
@@ -344,6 +355,40 @@
                     entity = "switch.aaron_s_bedroom_ceiling_fan";
                     icon = "mdi:ceiling-fan";
                     features = [ { type = "toggle"; } ];
+                  }
+                ];
+              }
+            ];
+          }
+          {
+            title = "Foyer View";
+            path = "foyer-view";
+            type = "sections";
+            subview = true;
+            back_path = "/nixos-lovelace/main";
+
+            header = {
+              layout = "center";
+              card = {
+                type = "markdown";
+                text_only = true;
+                content = "# Foyer";
+              };
+            };
+
+            sections = [
+              {
+                type = "grid";
+                cards = [
+                  {
+                    type = "heading";
+                    heading = "Controls";
+                  }
+                  {
+                    type = "tile";
+                    entity = "light.ceiling_light";
+                    icon = "mdi:light-recessed";
+                    features = [ { type = "light-brightness"; } ];
                   }
                 ];
               }
