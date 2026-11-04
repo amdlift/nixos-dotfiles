@@ -93,6 +93,10 @@
                       columns = 3;
                       rows = 2;
                     };
+                    tap-action = {
+                      action = "navigate";
+                      navigation_path = "/nixos-lovelace/main";
+                    };
                   }
                   {
                     type = "button";
@@ -117,6 +121,26 @@
                       columns = 3;
                       rows = 2;
                     };
+                  }
+                ];
+              }
+            ];
+          }
+          {
+            title = "Light View";
+            path = "light-view";
+            type = "sections";
+            subview = true;
+            back_path = "/nixos-lovelace/main";
+
+            sections = [
+              {
+                type = "grid";
+                cards = [
+                  {
+                    type = "tile";
+                    entity = "light.aarons_bedroom_aarons_bedroom_ceiling_fan_light";
+                    features = [ { type = "light-brightness"; } ];
                   }
                 ];
               }
