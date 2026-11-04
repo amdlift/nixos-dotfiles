@@ -7,7 +7,10 @@
       extraComponents = [
         # Components required to complete the onboarding
         "analytics"
+        "androidtv_remote"
+        "cast"
         "google_translate"
+        "homekit_controller"
         "lutron_caseta"
         "matter"
         "met"
