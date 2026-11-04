@@ -230,7 +230,7 @@
                   }
                   {
                     type = "tile";
-                    entity = "light.ceiling_light";
+                    entity = "light.foyer_ceiling_light";
                     icon = "mdi:ceiling-fan-light";
                     name = "Foyer";
                     show_state = false;
@@ -261,12 +261,12 @@
                   }
                   {
                     type = "tile";
-                    entity = "light.ceiling_light";
+                    entity = "light.foyer_ceiling_light";
                     features = [ { type = "light-brightness"; } ];
                   }
                   {
                     type = "tile";
-                    entity = "light.recessed_lights";
+                    entity = "light.front_porch_recessed_lights";
                     features = [ { type = "light-brightness"; } ];
                   }
                 ];
@@ -386,8 +386,8 @@
                   }
                   {
                     type = "tile";
-                    entity = "light.ceiling_light";
-                    icon = "mdi:light-recessed";
+                    entity = "light.foyer_ceiling_light";
+                    icon = "mdi:ceiling-light";
                     features = [ { type = "light-brightness"; } ];
                   }
                 ];
