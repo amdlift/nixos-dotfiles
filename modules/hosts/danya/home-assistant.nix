@@ -26,6 +26,10 @@
 
       extraPackages = ps: with ps; [ psycopg2 ];
 
+      customLovelaceModules = with pkgs.unstable.home-assistant-custom-lovelace-modules; [
+        card-mod
+      ];
+
       config = {
         # Includes  sudo ot-ctl router tabledependencies for a basic setup
         # https://www.home-assistant.io/integrations/default_config/
@@ -43,6 +47,8 @@
         };
 
         recorder.db_url = "postgresql://@/hass";
+
+        lovelace.resource_mode = "yaml";
 
         "automation nix" = [
           {
@@ -138,17 +144,24 @@
                     type = "tile";
                     entity = "light.aarons_bedroom_aarons_bedroom_ceiling_fan_light";
                     icon = "mdi:lamps";
-                    name = [ ];
                     hide_state = true;
                     vertical = true;
-                    grid_options = {
-                      columns = 3;
-                      rows = 2;
-                    };
+                    grid_options = { columns = 3; rows = 2; };
                     tap_action = {
                       action = "navigate";
                       navigation_path = "/nixos-lovelace/light-view";
                     };
+                    icon_tap_action = {
+                      action = "navigate";
+                      navigation_path = "/nixos-lovelace/light-view";
+                    };
+                    card_mod.style = ''
+                      ha-tile-info { display: none; }
+                      .content {
+                        height: 100%;
+                        justify-content: center;
+                      }
+                    '';
                   }
                   {
                     type = "button";
