@@ -160,34 +160,31 @@
                       navigation_path = "/nixos-lovelace/light-view";
                     };
                     card_mod.style = ''
-                      ha-state-icon {
-                        color: var(--amber-color) !important;
+                      ha-card {
+                        --card-mod-icon-color: var(--amber-color);
                       }
                     '';
                   }
                   {
                     type = "button";
                     entity = "light.aarons_bedroom_aarons_bedroom_ceiling_fan_light";
-                    name = " ";
-                    icon = "mdi:shield-home";
-                    hide_state = true;
-                    vertical = true;
-                    grid_options = {
-                      columns = 3;
-                      rows = 2;
-                    };
-                  }
-                  {
-                    type = "button";
-                    entity = "light.aarons_bedroom_aarons_bedroom_ceiling_fan_light";
-                    name = " ";
                     icon = "mdi:home-thermometer";
-                    hide_state = true;
-                    vertical = true;
+                    show_name = false;
+                    show_state = false;
+                    state_color = false;
                     grid_options = {
                       columns = 3;
                       rows = 2;
                     };
+                    tap_action = {
+                      action = "navigate";
+                      navigation_path = "/nixos-lovelace/climate-view";
+                    };
+                    card_mod.style = ''
+                      ha-card {
+                        --card-mod-icon-color: var(--blue-color);
+                      }
+                    '';
                   }
                 ];
               }
@@ -220,6 +217,19 @@
                     features = [ { type = "light-brightness"; } ];
                   }
                 ];
+              }
+            ];
+          }
+          {
+            title = "Climate View";
+            path = "climate-view";
+            type = "sections";
+            subview = true;
+            back_path = "/nixos-lovelace/main";
+
+            sections = [
+              {
+                type = "grid";
               }
             ];
           }
