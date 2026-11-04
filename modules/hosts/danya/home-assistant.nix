@@ -76,9 +76,14 @@
                 type = "grid";
                 cards = [
                   {
-                    type = "markdown";
-                    content = "# Hello {{ user }}";
-                    text_only = true;
+                    type = "tile";
+                    entity = "light.aarons_bedroom_aarons_bedroom_ceiling_fan_light";
+                    name = " ";
+                    icon = "lamps";
+                    hide_state = true;
+                    vertical = true;
+                    color = "amber";
+                    grid_options = { columns = 3; rows = 2; };
                   }
                 ];
               }
