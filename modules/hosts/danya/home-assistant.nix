@@ -135,11 +135,12 @@
                 type = "grid";
                 cards = [
                   {
-                    type = "button";
+                    type = "tile";
                     entity = "light.aarons_bedroom_aarons_bedroom_ceiling_fan_light";
                     icon = "mdi:lamps";
-                    show_name = false;
-                    show_state = false;
+                    name = [ ];
+                    hide_state = true;
+                    vertical = true;
                     grid_options = {
                       columns = 3;
                       rows = 2;
