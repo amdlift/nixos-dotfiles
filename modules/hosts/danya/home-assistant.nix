@@ -141,12 +141,12 @@
                 type = "grid";
                 cards = [
                   {
-                    type = "tile";
+                    type = "button";
                     entity = "light.aarons_bedroom_aarons_bedroom_ceiling_fan_light";
                     icon = "mdi:lamps";
-                    hide_state = true;
-                    vertical = true;
-                    color = "amber";
+                    show_name = false;
+                    show_state = false;
+                    state_color = false;
                     grid_options = {
                       columns = 3;
                       rows = 2;
@@ -155,13 +155,9 @@
                       action = "navigate";
                       navigation_path = "/nixos-lovelace/light-view";
                     };
-                    icon_tap_action.action = "none";
                     card_mod.style = ''
-                      ha-tile-info { display: none; }
-                      ha-tile-icon { pointer-events: none; }
-                      .content {
-                        height: 100%;
-                        justify-content: center;
+                      ha-state-icon {
+                        color: var(--amber-color) !important;
                       }
                     '';
                   }
