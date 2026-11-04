@@ -9,6 +9,7 @@
         "analytics"
         "androidtv_remote"
         "cast"
+        "ecobee"
         "google_translate"
         "homekit_controller"
         "lutron_caseta"
