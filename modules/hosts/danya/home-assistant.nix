@@ -231,12 +231,23 @@
                   {
                     type = "tile";
                     entity = "light.foyer_ceiling_light";
-                    icon = "mdi:ceiling-fan-light";
+                    icon = "mdi:ceiling-light";
                     name = "Foyer";
                     show_state = false;
                     tap_action = {
                       action = "navigate";
                       navigation_path = "/nixos-lovelace/foyer-view";
+                    };
+                  }
+                  {
+                    type = "tile";
+                    entity = "light.front_porch_recessed_lights";
+                    icon = "mdi:light-recessed";
+                    name = "Front Porch";
+                    show_state = false;
+                    tap_action = {
+                      action = "navigate";
+                      navigation_path = "/nixos-lovelace/front-porch-view";
                     };
                   }
                 ];
@@ -388,6 +399,40 @@
                     type = "tile";
                     entity = "light.foyer_ceiling_light";
                     icon = "mdi:ceiling-light";
+                    features = [ { type = "light-brightness"; } ];
+                  }
+                ];
+              }
+            ];
+          }
+          {
+            title = "Front Porch View";
+            path = "front-porch-view";
+            type = "sections";
+            subview = true;
+            back_path = "/nixos-lovelace/main";
+
+            header = {
+              layout = "center";
+              card = {
+                type = "markdown";
+                text_only = true;
+                content = "# Front Porch";
+              };
+            };
+
+            sections = [
+              {
+                type = "grid";
+                cards = [
+                  {
+                    type = "heading";
+                    heading = "Controls";
+                  }
+                  {
+                    type = "tile";
+                    entity = "light.front_porch_recessed_lights";
+                    icon = "mdi:light-recessed";
                     features = [ { type = "light-brightness"; } ];
                   }
                 ];
