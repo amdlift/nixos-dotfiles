@@ -43,6 +43,59 @@
         };
 
         recorder.db_url = "postgresql://@/hass";
+
+        "automation nix" = [
+          {
+            alias = "Porch lights: sunset on, sunrise off";
+            id = "bedroom_light_sun";
+            trigger = [
+              {
+                platform = "sun";
+                event = "sunset";
+                id = "sunset";
+              }
+              {
+                platform = "sun";
+                event = "sunrise";
+                id = "sunrise";
+              }
+            ];
+            action = [
+              {
+                choose = [
+                  {
+                    conditions = [
+                      {
+                        condition = "trigger";
+                        id = "sunset";
+                      }
+                    ];
+                    sequence = [
+                      {
+                        service = "light.turn_on";
+                        target.entity_id = "light.recessed_lights";
+                      }
+                    ];
+                  }
+                  {
+                    conditions = [
+                      {
+                        condition = "trigger";
+                        id = "sunrise";
+                      }
+                    ];
+                    sequence = [
+                      {
+                        service = "light.turn_off";
+                        target.entity_id = "light.recessed_lights";
+                      }
+                    ];
+                  }
+                ];
+              }
+            ];
+          }
+        ];
       };
 
       lovelaceConfig = {
