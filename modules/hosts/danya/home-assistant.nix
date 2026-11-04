@@ -187,6 +187,27 @@
                       }
                     '';
                   }
+                  {
+                    type = "button";
+                    entity = "light.aarons_bedroom_aarons_bedroom_ceiling_fan_light";
+                    icon = "mdi:shield-home";
+                    show_name = false;
+                    show_state = false;
+                    state_color = false;
+                    grid_options = {
+                      columns = 3;
+                      rows = 2;
+                    };
+                    tap_action = {
+                      action = "navigate";
+                      navigation_path = "/nixos-lovelace/security-view";
+                    };
+                    card_mod.style = ''
+                      ha-card {
+                        --card-mod-icon-color: var(--red-color);
+                      }
+                    '';
+                  }
                 ];
               }
             ];
@@ -224,6 +245,19 @@
           {
             title = "Climate View";
             path = "climate-view";
+            type = "sections";
+            subview = true;
+            back_path = "/nixos-lovelace/main";
+
+            sections = [
+              {
+                type = "grid";
+              }
+            ];
+          }
+          {
+            title = "Security View";
+            path = "security-view";
             type = "sections";
             subview = true;
             back_path = "/nixos-lovelace/main";
