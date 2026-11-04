@@ -223,6 +223,10 @@
                     icon = "mdi:ceiling-fan-light";
                     name = "Aaron's Bedroom";
                     show_state = false;
+                    tap_action = {
+                      action = "navigate";
+                      navigation_path = "/nixos-lovelace/aarons-bedroom-view";
+                    };
                   }
                 ];
               }
