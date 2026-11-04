@@ -278,6 +278,49 @@
             subview = true;
             back_path = "/nixos-lovelace/main";
 
+            header = {
+              layout = "center";
+              card = {
+                type = "markdown";
+                text_only = true;
+                content = "# Aaron's Bedroom";
+              };
+            };
+
+            badges = [
+              {
+                type = "entity";
+                entity = "sensor.aaron_s_bedroom_sensor_temperature";
+                name = "Aaron's Bedroom Temperature";
+                show_icon = true;
+                state_content = [
+                  "temperature"
+                ];
+              }
+              {
+                type = "entity";
+                entity = "sensor.aaron_s_bedroom_sensor_humidity";
+                name = "Aaron's Bedroom Humidity";
+                show_icon = true;
+                state_content = [
+                  "humidity"
+                ];
+              }
+            ];
+
+            sections = [
+              {
+                type = "grid";
+              }
+            ];
+          }
+          {
+            title = "Aaron's Bedroom View";
+            path = "aarons-bedroom-view";
+            type = "sections";
+            subview = true;
+            back_path = "/nixos-lovelace/main";
+
             sections = [
               {
                 type = "grid";
