@@ -294,6 +294,33 @@
             sections = [
               {
                 type = "grid";
+                cards = [
+                  {
+                    type = "heading";
+                    heading = "2nd Floor";
+                    icon = "mdi:home-floor-2";
+                  }
+                  {
+                    type = "thermostat";
+                    entity = "climate.hallway_thermostat";
+                    name = "2nd Floor Thermostat";
+                  }
+                ];
+              }
+              {
+                type = "grid";
+                cards = [
+                  {
+                    type = "heading";
+                    heading = "Attic";
+                    icon = "mdi:home-floor-a";
+                  }
+                  {
+                    type = "thermostat";
+                    entity = "climate.attic_thermostat";
+                    name = "Attic Thermostat";
+                  }
+                ];
               }
             ];
           }
