@@ -84,7 +84,7 @@
                     sequence = [
                       {
                         service = "light.turn_on";
-                        target.entity_id = "light.recessed_lights";
+                        target.entity_id = "light.front_porch_recessed_lights";
                       }
                     ];
                   }
@@ -98,7 +98,7 @@
                     sequence = [
                       {
                         service = "light.turn_off";
-                        target.entity_id = "light.recessed_lights";
+                        target.entity_id = "light.front_porch_recessed_lights";
                       }
                     ];
                   }
