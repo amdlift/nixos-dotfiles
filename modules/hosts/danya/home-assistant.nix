@@ -8,11 +8,13 @@
         # Components required to complete the onboarding
         "analytics"
         "google_translate"
+        "lutron_caseta"
         "matter"
         "met"
         "otbr"
         "radio_browser"
         "thread"
+        "tplink"
         "shopping_list"
         # Recommended for fast zlib compression
         # https://www.home-assistant.io/integrations/isal
