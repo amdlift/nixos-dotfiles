@@ -50,6 +50,10 @@
 
         lovelace.resource_mode = "yaml";
 
+        frontend.extra_module_url = [
+          "/local/nixos-lovelace-modules/card-mod.js"
+        ];
+
         "automation nix" = [
           {
             alias = "Porch lights: sunset on, sunrise off";
