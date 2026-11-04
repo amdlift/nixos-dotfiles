@@ -328,6 +328,17 @@
             sections = [
               {
                 type = "grid";
+                cards = [
+                  {
+                    type = "heading";
+                    heading = "Controls";
+                  }
+                  {
+                    type = "tile";
+                    entity = "light.aarons_bedroom_ceiling_fan_light";
+                    features = [ { type = "light-brightness"; } ];
+                  }
+                ];
               }
             ];
           }
