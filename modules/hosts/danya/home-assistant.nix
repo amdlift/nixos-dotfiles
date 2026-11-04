@@ -341,7 +341,7 @@
                   }
                   {
                     type = "tile";
-                    entity = "light.aaron_s_bedroom_ceiling_fan";
+                    entity = "switch.aaron_s_bedroom_ceiling_fan";
                     icon = "mdi:ceiling-fan";
                     features = [ { type = "toggle"; } ];
                   }
