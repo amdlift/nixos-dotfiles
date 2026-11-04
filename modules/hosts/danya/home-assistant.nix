@@ -146,17 +146,19 @@
                     icon = "mdi:lamps";
                     hide_state = true;
                     vertical = true;
-                    grid_options = { columns = 3; rows = 2; };
+                    color = "amber";
+                    grid_options = {
+                      columns = 3;
+                      rows = 2;
+                    };
                     tap_action = {
                       action = "navigate";
                       navigation_path = "/nixos-lovelace/light-view";
                     };
-                    icon_tap_action = {
-                      action = "navigate";
-                      navigation_path = "/nixos-lovelace/light-view";
-                    };
+                    icon_tap_action.action = "none";
                     card_mod.style = ''
                       ha-tile-info { display: none; }
+                      ha-tile-icon { pointer-events: none; }
                       .content {
                         height: 100%;
                         justify-content: center;
