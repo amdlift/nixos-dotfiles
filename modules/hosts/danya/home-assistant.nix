@@ -147,7 +147,7 @@
                 cards = [
                   {
                     type = "button";
-                    entity = "light.aarons_bedroom_ceiling_fan_light";
+                    entity = "light.aaron_s_bedroom_ceiling_fan_light";
                     icon = "mdi:lamps";
                     show_name = false;
                     show_state = false;
@@ -168,7 +168,7 @@
                   }
                   {
                     type = "button";
-                    entity = "light.aarons_bedroom_ceiling_fan_light";
+                    entity = "light.aaron_s_bedroom_ceiling_fan_light";
                     icon = "mdi:home-thermometer";
                     show_name = false;
                     show_state = false;
@@ -189,7 +189,7 @@
                   }
                   {
                     type = "button";
-                    entity = "light.aarons_bedroom_ceiling_fan_light";
+                    entity = "light.aaron_s_bedroom_ceiling_fan_light";
                     icon = "mdi:shield-home";
                     show_name = false;
                     show_state = false;
@@ -219,7 +219,7 @@
                   }
                   {
                     type = "tile";
-                    entity = "light.aarons_bedroom_ceiling_fan_light";
+                    entity = "light.aaron_s_bedroom_ceiling_fan_light";
                     icon = "mdi:ceiling-fan-light";
                     name = "Aaron's Bedroom";
                     show_state = false;
@@ -245,7 +245,7 @@
                 cards = [
                   {
                     type = "tile";
-                    entity = "light.aarons_bedroom_ceiling_fan_light";
+                    entity = "light.aaron_s_bedroom_ceiling_fan_light";
                     features = [ { type = "light-brightness"; } ];
                   }
                   {
@@ -335,8 +335,15 @@
                   }
                   {
                     type = "tile";
-                    entity = "light.aarons_bedroom_ceiling_fan_light";
+                    entity = "light.aaron_s_bedroom_ceiling_fan_light";
+                    icon = "mdi:ceiling-fan-light";
                     features = [ { type = "light-brightness"; } ];
+                  }
+                  {
+                    type = "tile";
+                    entity = "light.aaron_s_bedroom_ceiling_fan";
+                    icon = "mdi:ceiling-fan";
+                    features = [ { type = "toggle"; } ];
                   }
                 ];
               }
