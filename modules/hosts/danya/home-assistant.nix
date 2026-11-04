@@ -107,6 +107,17 @@
             ];
           }
         ];
+        scene = [
+          {
+            id = "aaron_night";
+            name = "Night";
+            icon = "mdi:weather-night";
+            entities = {
+              "light.aaron_s_bedroom_ceiling_fan_light" = "off";
+              "switch.aaron_s_bedroom_ceiling_fan" = "on";
+            };
+          }
+        ];
       };
 
       lovelaceConfig = {
@@ -205,6 +216,28 @@
                     card_mod.style = ''
                       ha-card {
                         --card-mod-icon-color: var(--red-color);
+                      }
+                    '';
+                  }
+                  {
+                    type = "button";
+                    entity = "scene.night";
+                    icon = "mdi:weather-night";
+                    show_name = false;
+                    show_state = false;
+                    state_color = false;
+                    grid_options = {
+                      columns = 3;
+                      rows = 2;
+                    };
+                    tap_action = {
+                      action = "perform-action";
+                      perform_action = "scene.turn_on";
+                      target.entity_id = "scene.night";
+                    };
+                    card_mod.style = ''
+                      ha-card {
+                        --card-mod-icon-color: var(--indigo-color);
                       }
                     '';
                   }
