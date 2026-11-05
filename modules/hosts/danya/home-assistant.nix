@@ -28,6 +28,10 @@
 
       extraPackages = ps: with ps; [ psycopg2 ];
 
+      customComponents = with pkgs.unstable.home-assistant-custom-components; [
+        tuya_local
+      ];
+
       customLovelaceModules = with pkgs.unstable.home-assistant-custom-lovelace-modules; [
         card-mod
       ];
