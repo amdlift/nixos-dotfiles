@@ -56,6 +56,15 @@
           "/local/nixos-lovelace-modules/card-mod.js"
         ];
 
+        person = [
+          {
+            name = "Aaron";
+            id = "aaron";
+            user_id = "2b109f9a9404405ea29ff64a886fef54";
+            device_trackers = [ "device_tracker.aarons_iphone" ];
+          }
+        ];
+
         "automation nix" = [
           {
             alias = "Porch lights: sunset on, sunrise off";
