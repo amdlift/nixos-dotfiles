@@ -69,6 +69,21 @@
         sessionPackages = [ pkgs.unstable.kdePackages.plasma-bigscreen ];
       };
 
+      services.printing = {
+        enable = true;
+        drivers = with pkgs; [
+          epson-escpr2   # newer EcoTanks
+          epson-escpr    # fallback; harmless to include both
+        ];
+      };
+
+      # Network printer discovery (for Wi-Fi)
+      services.avahi = {
+        enable = true;
+        nssmdns4 = true;
+        openFirewall = true;
+      };
+
       time.timeZone = "America/Chicago";
 
       i18n.extraLocaleSettings = {
