@@ -72,8 +72,8 @@
       services.printing = {
         enable = true;
         drivers = with pkgs; [
-          epson-escpr2   # newer EcoTanks
-          epson-escpr    # fallback; harmless to include both
+          epson-escpr2 # newer EcoTanks
+          epson-escpr # fallback; harmless to include both
         ];
       };
 
