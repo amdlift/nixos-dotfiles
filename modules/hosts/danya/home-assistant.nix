@@ -4,6 +4,14 @@
     den.aspects.agenix
   ];
   den.aspects.danya._.home-assistant.nixos = { pkgs, ... }: {
+    age.secrets.hass-secrets = {
+      file = ../../../secrets/hass-secrets.age;
+      path = "/var/lib/hass/secrets.yaml";
+      owner = "hass";
+      group = "hass";
+      mode = "0400";
+    };
+
     services.home-assistant = {
       enable = true;
       package = pkgs.unstable.home-assistant;
@@ -47,6 +55,9 @@
           name = "Home";
           unit_system = "us_customary";
           time_zone = "America/Chicago";
+          latitude = "!secret home_latitude";
+          longitude = "!secret home_longitude";
+          elevation = "!secret home_elevation";
         };
 
         http = {

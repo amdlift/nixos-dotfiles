@@ -5,11 +5,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  den.aspects.agenix = { pkgs, ... }: {
-    nixos = {
-      imports = [ inputs.agenix.nixosModules.default ];
-    };
 
+  den.aspects.agenix.nixos = { pkgs, ... }: {
+    imports = [ inputs.agenix.nixosModules.default ];
     environment.systemPackages = [
       inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
