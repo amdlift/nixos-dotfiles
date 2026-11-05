@@ -1,5 +1,8 @@
 { den, ... }: {
-  den.aspects.danya._.home-assistant.includes = [ den.aspects.unstable ];
+  den.aspects.danya._.home-assistant.includes = [
+    den.aspects.unstable
+    den.aspects.agenix
+  ];
   den.aspects.danya._.home-assistant.nixos = { pkgs, ... }: {
     services.home-assistant = {
       enable = true;
