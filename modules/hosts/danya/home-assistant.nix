@@ -107,6 +107,82 @@
               }
             ];
           }
+          {
+            alias = "Bedroom: off when Aaron leaves, restore when home";
+            id = "bedroom_away_restore";
+            mode = "queued";
+            trigger = [
+              {
+                platform = "state";
+                entity_id = "person.aaron";
+                from = "home";
+                to = "not_home";
+                for = "00:05:00";
+                id = "left";
+              }
+              {
+                platform = "state";
+                entity_id = "person.aaron";
+                to = "home";
+                id = "arrived";
+              }
+            ];
+            action = [
+              {
+                choose = [
+                  {
+                    conditions = [
+                      {
+                        condition = "trigger";
+                        id = "left";
+                      }
+                    ];
+                    sequence = [
+                      {
+                        service = "scene.create";
+                        data = {
+                          scene_id = "aaron_away_snapshot";
+                          snapshot_entities = [
+                            "light.aaron_s_bedroom_ceiling_fan_light"
+                            "light.aaron_s_bedroom_ceiling_fan"
+                          ];
+                        };
+                      }
+                      {
+                        service = "light.turn_off";
+                        target.entity_id = [
+                          "light.aaron_s_bedroom_ceiling_fan_light"
+                          "light.aaron_s_bedroom_ceiling_fan"
+                        ];
+                      }
+                    ];
+                  }
+                  {
+                    conditions = [
+                      {
+                        condition = "trigger";
+                        id = "arrived";
+                      }
+                      {
+                        condition = "template";
+                        value_template = "{{ states.scene.aaron_away_snapshot is not none }}";
+                      }
+                    ];
+                    sequence = [
+                      {
+                        service = "scene.turn_on";
+                        target.entity_id = "scene.aaron_away_snapshot";
+                      }
+                      {
+                        service = "scene.delete";
+                        target.entity_id = "scene.aaron_away_snapshot";
+                      }
+                    ];
+                  }
+                ];
+              }
+            ];
+          }
         ];
         scene = [
           {
