@@ -8,6 +8,7 @@
         # Components required to complete the onboarding
         "analytics"
         "androidtv_remote"
+        "blink"
         "cast"
         "ecobee"
         "google_translate"
