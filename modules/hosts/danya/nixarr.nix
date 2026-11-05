@@ -2,6 +2,7 @@
   den.aspects.danya._.nixarr = {
     includes = [
       den.aspects.nixarr
+      den.aspects.unstable
     ];
 
     nixos.services = {
@@ -10,7 +11,7 @@
       radarr.settings.auth.required = "DisabledForLocalAddresses";
     };
 
-    nixos.nixarr = {
+    nixos.nixarr = { pkgs, ... }: {
       mediaDir = "/zfspool/media";
       stateDir = "/zfspool/media/.state/nixarr";
 
@@ -167,6 +168,7 @@
 
       seerr = {
         enable = true;
+        package = pkgs.unstable.seerr;
         openFirewall = true;
         expose.https = {
           enable = true;
