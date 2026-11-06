@@ -419,7 +419,7 @@
                   }
                   {
                     type = "tile";
-                    entity = "light.aaron_s_bedroom_dimmer_switch";
+                    entity = "light.aaron_s_closet_dimmer_switch";
                     features = [ { type = "light-brightness"; } ];
                   }
                 ];
