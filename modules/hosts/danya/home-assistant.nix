@@ -417,6 +417,11 @@
                     entity = "light.front_porch_recessed_lights";
                     features = [ { type = "light-brightness"; } ];
                   }
+                  {
+                    type = "tile";
+                    entity = "light.aaron_s_bedroom_dimmer_switch";
+                    features = [ { type = "light-brightness"; } ];
+                  }
                 ];
               }
             ];
