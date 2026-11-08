@@ -1,6 +1,12 @@
 { den, ... }: {
   den.aspects.danya._.minecraft-server = {
-    includes = [ den.aspects.minecraft-server ];
+    includes = [
+      den.aspects.minecraft-server
+
+      (den._.unfree [
+        "neoforge"
+      ])
+    ];
 
     nixos = { pkgs, ... }: {
       services.minecraft-servers = {
