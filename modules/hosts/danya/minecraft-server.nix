@@ -70,6 +70,14 @@
                   url = "https://cdn.modrinth.com/data/FoVacERa/versions/fTRMVgyZ/lionfishapi-3.1.jar";
                   sha512 = "fdd90f19d0424c3a837111291d6ac1547d62cbcedd43b74d3a8946912f9c5212a5ea239a6969eccf678289bcb77cbb9a937db01fdaf60e57826f9a99893d19cb";
                 };
+                Patchouli = pkgs.fetchurl {
+                  url = "https://cdn.modrinth.com/data/nU0bVIaL/versions/BIogJv2D/Patchouli-1.21.1-93-NEOFORGE.jar";
+                  sha512 = "0b5c172db9a6eeecb5ca44b359a83548c3a60be7ff313959acdfc1e5b8039736c18e57e947d435b52d06da31159d2d02ea36e5742668dbc826308a4c99e4039f";
+                };
+                Placebo = pkgs.fetchurl {
+                  url = "https://cdn.modrinth.com/data/tCkE8p2N/versions/B5zbSVlT/Placebo-1.21.1-9.9.4.jar";
+                  sha512 = "4f3a9c5974132f3638c262c56b0c2886df2bc58027c961aa11d06d0ae2e608b63f24f949b2f8c240989e2a1bfe303fd237c5f2d49269453ad6c2ff1f85f2c648";
+                };
                 playerAnimator = pkgs.fetchurl {
                   url = "https://cdn.modrinth.com/data/gedNE4y2/versions/HJZB6bmA/player-animation-lib-forge-2.0.4%2B1.21.1.jar";
                   sha512 = "fc00450fb6c95ec1779021bdc726122dacb5915c6baddaacc981cd221b01b8db35f2a0dfde5d6fa6766d877266dc82f58854f571ea53cc5c4d468b80e1548a5f";
@@ -77,6 +85,26 @@
 
                 # Content
 
+                Apotheosis = pkgs.fetchurl {
+                  url = "https://cdn.modrinth.com/data/rqFWfVlz/versions/veL1ccTb/Apotheosis-1.21.1-8.9.0.jar";
+                  sha512 = "b3022bc31f4e9f99d298c36486e09cad308d4aa87e2aa65a341809aeca41f0067e744086768884959036a46685d4c0babc4274600884ad8962fe9d080d8ef3ee";
+                };
+                Apotheosis-x-Irons-Spellbook-Compat = pkgs.fetchurl {
+                  url = "https://mediafilez.forgecdn.net/files/9234/276/irons_apothic-2.2.8.jar";
+                  sha512 = "sha512-Uw/TA8cxr7stEpCOW0vsyYSs8gyZ9l4YKfpOQUTILMbUBfIEN6qBZmrIl7ujCo2Xy+EHVjXFJ1TK4heYTXG2IA==";
+                };
+                Apothic-Attributes = pkgs.fetchurl {
+                  url = "https://cdn.modrinth.com/data/DGaH8Rh0/versions/64fZbLnj/ApothicAttributes-1.21.1-2.11.0.jar";
+                  sha512 = "568580e68016161151fc0254fb0da949b42cf285fa2bf7c3aec1cd320405c430483e9eb990aaddef537bfac4aa4beb21db82fbff9249131e05b15063b6839611";
+                };
+                Apothic-Enchanting = pkgs.fetchurl {
+                  url = "https://cdn.modrinth.com/data/pL8MtgqY/versions/JAQJkLJ1/ApothicEnchanting-1.21.1-1.6.4.jar";
+                  sha512 = "b560ed61810030472c42fa39e6199b1db07c19baba8f78d98b44ab3e1d00a1bebff5f69942bd076fea9754f63940df920cfb19906073b77bcc459bb8d88575de";
+                };
+                Apothic-Spawners = pkgs.fetchurl {
+                  url = "https://cdn.modrinth.com/data/DfxVkOAO/versions/pWfxcfO2/ApothicSpawners-1.21.1-1.4.0.jar";
+                  sha512 = "2fdd49cdb3e6610846c3a746ab0730d6d49412eaf8c21e3d0b9d588d80c8cd1a1d0b7e19ade7fc86fd699ac02e270e5fa01fb5cf106d24a7740692ecc1ad8820";
+                };
                 Irons-Spells-n-Spellbooks = pkgs.fetchurl {
                   url = "https://cdn.modrinth.com/data/s4OWxYQQ/versions/slKLosTb/irons_spellbooks-1.21.1-3.16.3.jar";
                   sha512 = "fd782f98c6c59b193c4832f33775291d2a7e639e1e23dd47510bfb494d99d182bec1253566b9394f96c733a0d0108be34bd729614b82dc29e55e096fdeb96f5b";
