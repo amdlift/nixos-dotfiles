@@ -25,6 +25,7 @@
       url = "github:mangowm/mango";
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
     nixarr.url = "github:nix-media-server/nixarr";
     nixcord.url = "github:4evy/nixcord";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
