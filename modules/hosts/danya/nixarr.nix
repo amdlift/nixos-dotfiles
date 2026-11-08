@@ -22,6 +22,7 @@
 
         jellyfin = {
           enable = true;
+          openFirewall = true;
           expose.https = {
             enable = true;
             domainName = "jellyfin.amdlift.com";
