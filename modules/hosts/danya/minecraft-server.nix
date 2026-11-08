@@ -140,6 +140,16 @@
             );
           };
 
+          jvmOpts = builtins.concatStringsSep " " [
+            "-Xms8G"
+            "-Xmx8G"
+            "-XX:+UseZGC"
+            "-XX:+UseCompactObjectHeaders"
+            "-XX:+AlwaysPreTouch"
+            "-XX:+DisableExplicitGC"
+            "-XX:+PerfDisableSharedMem"
+          ];
+
           whitelist = {
             amdlift = "20d4645e-439a-44af-8694-ef5d66fe0832";
             amberlargo = "d1f10dd3-7d33-46e4-9bfb-c4da23d25a1a";
