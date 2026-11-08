@@ -28,8 +28,8 @@
                 # Performance
 
                 Distant-Horizons = pkgs.fetchurl {
-                  url = "https://cdn.modrinth.com/data/uCdwusMi/versions/TGgEbP9A/DistantHorizons-3.3.4-26.3-fabric-neoforge.jar";
-                  sha512 = "0b90b1b08d99974bfc3c8e86b2ceb252e2f91715ed66b925004c28335fb44e1bddbbb6b8043e4d4d53c87ed247789cd1788b1ba4e3f4394efe154e0c59cff236";
+                  url = "https://cdn.modrinth.com/data/uCdwusMi/versions/9w34y8ai/DistantHorizons-3.3.3-1.21.1-fabric-neoforge.jar";
+                  sha512 = "d14b32d3fd143a06514d6ad388eee11e9d657c84e1a937aaf8d033b1137fb43ef8b05cff1011a994cc42f3106823c51234f8bc18d72bb05bc317a20ea83c50ed";
                 };
                 FerritCore = pkgs.fetchurl {
                   url = "https://cdn.modrinth.com/data/uXXizFIs/versions/x7kQWVju/ferritecore-7.0.3-neoforge.jar";
@@ -50,13 +50,29 @@
                   url = "https://cdn.modrinth.com/data/7zlUOZvb/versions/R8LC8RYk/azurelib-neo-1.21.1-3.2.7.jar";
                   sha512 = "80d81bbcaf9d4296263b48bf0df8272a34cf79f61552b67f1ed17246dccfb0f0f5ae9bf2a259143ac5ed0e3bccf53c5757b2a2e41c22276e2727d702f6985e99";
                 };
+                Balm = pkgs.fetchurl {
+                  url = "https://cdn.modrinth.com/data/MBAkmtvl/versions/gMedgtzL/balm-neoforge-1.21.1-21.0.67.jar";
+                  sha512 = "ad4f4df829b1195446486df818c2c1f0bf6738cb1b30cfdbf9eae4855ce62a66b00f2dc5e0a87409f25ce4eba9bd5c94e1b10d1940af451d5ef7dd7f4b3d8ebd";
+                };
                 Curios-API = pkgs.fetchurl {
                   url = "https://cdn.modrinth.com/data/vvuO3ImH/versions/yohfFbgD/curios-neoforge-9.5.1%2B1.21.1.jar";
                   sha512 = "5981a267686b744e7e3c227f78cbcd5267c14ac6979a28e814695f4589273998563147207fef4a5cdb7cdbdc39797cd95d9e4abadb55869f18e02a38d0654ae5";
                 };
+                GeckoLib = pkgs.fetchurl {
+                  url = "https://cdn.modrinth.com/data/8BmcQJ2H/versions/Grwn5rUB/geckolib-neoforge-1.21.1-4.9.3.jar";
+                  sha512 = "8dfa5f8c57224a5e34e5098367ea9819ca6dc9c11357cd3062c16da3455c8bd1a483098af7383debc4b9ce8e4d7ab3fdc799b415644eb829da83eb72a7335dfd";
+                };
+                Irons-Lib = pkgs.fetchurl {
+                  url = "https://cdn.modrinth.com/data/9nfaJPtX/versions/dgH7P81J/irons_lib-1.21.1-2.3.0.jar";
+                  sha512 = "74c609a583af1547c36ad39a7f89074a221f106fad5a246810d4921f91d0fc2df5660ef75f47f33e5f546cc51147d78ecbcff883da4a53f24002311697d0a99b";
+                };
                 Lionfish-API = pkgs.fetchurl {
                   url = "https://cdn.modrinth.com/data/FoVacERa/versions/fTRMVgyZ/lionfishapi-3.1.jar";
                   sha512 = "fdd90f19d0424c3a837111291d6ac1547d62cbcedd43b74d3a8946912f9c5212a5ea239a6969eccf678289bcb77cbb9a937db01fdaf60e57826f9a99893d19cb";
+                };
+                playerAnimator = pkgs.fetchurl {
+                  url = "https://cdn.modrinth.com/data/gedNE4y2/versions/HJZB6bmA/player-animation-lib-forge-2.0.4%2B1.21.1.jar";
+                  sha512 = "fc00450fb6c95ec1779021bdc726122dacb5915c6baddaacc981cd221b01b8db35f2a0dfde5d6fa6766d877266dc82f58854f571ea53cc5c4d468b80e1548a5f";
                 };
 
                 # Content
