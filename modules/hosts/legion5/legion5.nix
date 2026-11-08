@@ -49,6 +49,7 @@
         jq
         ollama-cuda
         podman-compose
+        prismlauncher
         ranger
         rofi
         slurp
