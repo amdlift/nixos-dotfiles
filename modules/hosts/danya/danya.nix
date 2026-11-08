@@ -16,6 +16,7 @@
 
       danya._.home-assistant
       danya._.immich
+      danya._.minecraft-server
       danya._.nixarr
       danya._.opengym
       danya._.zfs
