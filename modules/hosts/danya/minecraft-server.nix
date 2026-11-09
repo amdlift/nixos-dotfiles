@@ -82,6 +82,10 @@
                   url = "https://cdn.modrinth.com/data/gedNE4y2/versions/HJZB6bmA/player-animation-lib-forge-2.0.4%2B1.21.1.jar";
                   sha512 = "fc00450fb6c95ec1779021bdc726122dacb5915c6baddaacc981cd221b01b8db35f2a0dfde5d6fa6766d877266dc82f58854f571ea53cc5c4d468b80e1548a5f";
                 };
+                YUNGs-API = pkgs.fetchurl {
+                  url = "https://cdn.modrinth.com/data/Ua7DFN59/versions/2prKITKh/YungsApi-1.21.1-NeoForge-5.1.9.jar";
+                  sha512 = "7e3cf0b429e8a1c51dca094c2d8eabf12245bb42cbcd8b6e3e54959f931bef93201b81a08d200b417059aaa438e8eb445c3978a09568597bfb588199b7775967";
+                };
 
                 # Content
 
@@ -126,8 +130,27 @@
                   sha512 = "99107b3b2a1c8f1a120ebbe427ef3a7e83a0b19d2548b63887d2b9c38ff9158a8bfacb587dfeb7f3ccf082eb87c6bff804bf5bb05970ad5f2a20a32d4234d8bf";
                 };
 
+                # WorldGen
+
+                YUNGs-Better-Dungeons = pkgs.fetchurl {
+                  url = "https://cdn.modrinth.com/data/o1C1Dkj5/versions/D6aZn0Em/YungsBetterDungeons-1.21.1-NeoForge-5.1.4.jar";
+                  sha512 = "40513bacd13fa9860abcab507b1fc09dc51649af4b615ce466e0ec361557f02d35e6e44bea1cc17cb4120805f862aad01394eb185f46611e7be63dfd97f272df";
+                };
+                YUNGs-Better-Mineshafts = pkgs.fetchurl {
+                  url = "https://cdn.modrinth.com/data/HjmxVlSr/versions/Go3nbneL/YungsBetterMineshafts-1.21.1-NeoForge-5.1.1.jar";
+                  sha512 = "8b01b386f53feeaa55f0c62697578b82e00501e45e428b2a68df6bda34efb6a4b3b4e3582abf13fe767ebcb61aef9368186f53c03999958bef38f31c41a7f8b2";
+                };
+                YUNGs-Better-Strongholds = pkgs.fetchurl {
+                  url = "https://cdn.modrinth.com/data/kidLKymU/versions/8U0dIfSM/YungsBetterStrongholds-1.21.1-NeoForge-5.1.3.jar";
+                  sha512 = "385d67e07f2c67af5ea387d92d92949d8f671e8f99204457b6396dbe987ac3b14c2bff765df5fcbaa68016604f82a1fc6ec5a69c012ca22ad088d1a7c9bc135d";
+                };
+
                 # QOL
 
+                Gravestone-Mod = pkgs.fetchurl {
+                  url = "https://cdn.modrinth.com/data/RYtXKJPr/versions/rMGJpjaM/gravestone-neoforge-1.21.1-1.0.40.jar";
+                  sha512 = "5504a222d4085da1898ff6d4dff8eb1821fd14a8caaaac785554277147f984262e63925a411db3f1a34e9c7874652fb6737176bea4c0c3f01243f5eae4ea6eaa";
+                };
                 JEI = pkgs.fetchurl {
                   url = "https://cdn.modrinth.com/data/u6dRKJwZ/versions/1vC6z8wV/jei-1.21.1-neoforge-19.70.0.469.jar";
                   sha512 = "65e9ed5d032e6f284dbdc7f5a41ca43f35ffb9e086419105ee6b360333b1349dc5967bf6ca250f8f02adf73326318945b6c4e57624c0e0a09fc566731e328bc1";
