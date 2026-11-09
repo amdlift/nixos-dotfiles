@@ -27,7 +27,7 @@
     ];
 
     nixos = { pkgs, ... }: {
-      imports = [ ./_hardware.nix ];
+      imports = [ ./_hardware.nix ./_nextcloud.nix ];
 
       nix.settings.trusted-users = [ "aaron" ];
 
