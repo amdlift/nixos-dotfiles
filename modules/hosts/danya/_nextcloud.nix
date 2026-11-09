@@ -2,6 +2,7 @@
   environment.etc."nextcloud-admin-pass".text = "password";
   services.nextcloud = {
     enable = true;
+    package = pkgs.nextcloud33;
     hostName = "nextcloud.amdlift.com";
     https = true;
     config.adminpassFile = "/etc/nextcloud-admin-pass";
