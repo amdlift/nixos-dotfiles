@@ -56,7 +56,10 @@
         LC_TIME = "en_US.UTF-8";
       };
 
-      networking.firewall.allowedTCPPorts = [ 8087 8088 ];
+      networking.firewall.allowedTCPPorts = [
+        8087
+        8088
+      ];
 
       hardware.nvidia.open = false;
       hardware.nvidia.branch = "legacy_580";
