@@ -47,6 +47,7 @@
         glab
         grim
         jq
+        logseq
         ollama-cuda
         podman-compose
         prismlauncher
