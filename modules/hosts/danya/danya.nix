@@ -61,6 +61,11 @@
         8088
       ];
 
+      security.acme = {
+        acceptTerms = true;
+        defaults.email = "aaron.m.davis@comcast.net";
+      };
+
       services.nginx.virtualHosts."amberlargo.com" = {
         serverAliases = [ "www.amberlargo.com" ];
         enableACME = true; # get a Let's Encrypt cert
