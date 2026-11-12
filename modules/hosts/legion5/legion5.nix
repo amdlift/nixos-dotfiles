@@ -47,7 +47,6 @@
         glab
         grim
         jq
-        logseq
         ollama-cuda
         podman-compose
         prismlauncher
@@ -60,6 +59,7 @@
 
         unstable.kdePackages.plasma-bigscreen
         unstable.lightcraft
+        unstable.logseq
         unstable.photocraft
       ];
 
