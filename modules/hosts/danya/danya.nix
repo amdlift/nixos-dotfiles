@@ -61,6 +61,16 @@
         8088
       ];
 
+      services.nginx.virtualHosts."amberlargo.com" = {
+        serverAliases = [ "www.amberlargo.com" ];
+        enableACME = true; # get a Let's Encrypt cert
+        forceSSL = true; # redirect http -> https
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8087";
+          proxyWebsockets = true; # harmless if the app doesn't use them
+        };
+      };
+
       hardware.nvidia.open = false;
       hardware.nvidia.branch = "legacy_580";
     };
