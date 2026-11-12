@@ -47,6 +47,7 @@
         glab
         grim
         jq
+        logseq
         ollama-cuda
         podman-compose
         prismlauncher
@@ -59,8 +60,11 @@
 
         unstable.kdePackages.plasma-bigscreen
         unstable.lightcraft
-        unstable.logseq
         unstable.photocraft
+      ];
+
+      nixpkgs.config.permittedInsecurePackages = [
+        "electron-39.8.10"
       ];
 
       services.flatpak.packages = [
