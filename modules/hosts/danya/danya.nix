@@ -67,7 +67,6 @@
       };
 
       services.nginx.virtualHosts."amberlargo.com" = {
-        serverAliases = [ "www.amberlargo.com" ];
         enableACME = true; # get a Let's Encrypt cert
         forceSSL = true; # redirect http -> https
         locations."/" = {
