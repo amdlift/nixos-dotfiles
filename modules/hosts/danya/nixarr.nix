@@ -54,6 +54,9 @@
               "WebUI\\Password_PBKDF2" =
                 "@ByteArray(hf/jOOjiKDh5qCCypQoT7Q==:EZoc9RnDeZCDL7qDnYeEp4swuZz7e60CaLItWah+2CJnjzQ5Mv3bGZVjkLlQjPonN8opYtpXo+kVxdLH2tQvXw==)";
             };
+            BitTorrent = {
+              "Session\\QueueingSystemEnabled" = false;
+            };
           };
         };
 
