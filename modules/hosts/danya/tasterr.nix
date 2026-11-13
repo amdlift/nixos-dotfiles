@@ -6,7 +6,6 @@
         containers.tasterr = {
           image = "ghcr.io/zacharyarthur/tasterr:latest";
           user = "568:568";
-          ports = [ "8000:8000" ];
           volumes = [ "/etc/tasterr:/data" ];
           environment = {
             SEERR_INTERNAL_URL = "http://192.168.1.211:5055";
@@ -14,6 +13,7 @@
           };
           # Keeps secrets out of the world-readable Nix store
           environmentFiles = [ "/etc/secrets/tasterr.env" ];
+          extraOptions = [ "--network=host" ];
         };
       };
 
