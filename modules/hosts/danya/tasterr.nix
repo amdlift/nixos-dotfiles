@@ -21,6 +21,15 @@
       systemd.tmpfiles.rules = [
         "d /etc/tasterr 0750 568 568 -"
       ];
+
+      services.nginx.virtualHosts."tasterr.amdlift.com" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:8000";
+        proxyWebsockets = true;
+      };
+    };
     };
   };
 }
