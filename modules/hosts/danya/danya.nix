@@ -19,6 +19,7 @@
       danya._.minecraft-server
       danya._.nixarr
       danya._.opengym
+      danya._.tasterr
       danya._.zfs
 
       (den._.unfree [
