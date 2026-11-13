@@ -42,6 +42,7 @@
         brightnessctl
         btop-cuda
         claude-code
+        distrobox
         eden
         gh
         glab
@@ -51,6 +52,7 @@
         ollama-cuda
         podman-compose
         prismlauncher
+        qgroundcontrol
         ranger
         rofi
         slurp
