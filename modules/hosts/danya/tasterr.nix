@@ -8,7 +8,7 @@
           user = "568:568";
           volumes = [ "/etc/tasterr:/data" ];
           environment = {
-            SEERR_INTERNAL_URL = "http://192.168.1.211:5055";
+            SEERR_INTERNAL_URL = "http://127.0.0.1:5055";
             SEERR_EXTERNAL_URL = "https://seerr.amdlift.com";
           };
           # Keeps secrets out of the world-readable Nix store
