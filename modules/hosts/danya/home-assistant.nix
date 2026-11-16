@@ -140,6 +140,14 @@
             name = "Game Room";
             entity = gameRoomLights;
             icon = "mdi:controller";
+            extraTiles = [
+              {
+                type = "tile";
+                entity = gameRoomFan;
+                icon = "mdi:ceiling-fan";
+                features = [ { type = "toggle"; } ];
+              }
+            ];
           }
         ];
 
