@@ -1,642 +1,491 @@
-{ den, ... }: {
-  den.aspects.danya._.home-assistant.includes = [
-    den.aspects.unstable
-    den.aspects.agenix
-  ];
-  den.aspects.danya._.home-assistant.nixos = { pkgs, ... }: {
-    age.secrets.hass-secrets = {
-      file = ../../../secrets/hass-secrets.age;
-      path = "/var/lib/hass/secrets.yaml";
-      owner = "hass";
-      group = "hass";
-      mode = "0400";
-    };
+{ den, ... }:
+{
+  den.aspects.danya._.home-assistant = {
+    includes = [
+      den.aspects.unstable
+      den.aspects.agenix
+    ];
 
-    services.home-assistant = {
-      enable = true;
-      package = pkgs.unstable.home-assistant;
-      extraComponents = [
-        # Components required to complete the onboarding
-        "analytics"
-        "androidtv"
-        "androidtv_remote"
-        "blink"
-        "cast"
-        "ecobee"
-        "google_translate"
-        "homekit_controller"
-        "lutron_caseta"
-        "matter"
-        "met"
-        "otbr"
-        "radio_browser"
-        "thread"
-        "tplink"
-        "shopping_list"
-        # Recommended for fast zlib compression
-        # https://www.home-assistant.io/integrations/isal
-        "isal"
-      ];
+    nixos =
+      { pkgs, lib, ... }:
+      let
+        # ── Entities ────────────────────────────────────────────────
+        bedroomLight = "light.aaron_s_bedroom_ceiling_fan_light";
+        bedroomFan = "switch.aaron_s_bedroom_ceiling_fan";
+        foyerLight = "light.foyer_ceiling_light";
+        porchLight = "light.front_porch_recessed_lights";
+        closetLight = "light.aaron_s_closet_dimmer_switch";
 
-      extraPackages = ps: with ps; [ psycopg2 ];
+        # Game Room
+        gameRoomLights = "light.game_room_main_lights";
+        gameRoomFan = "switch.game_room_ceiling_fan";
 
-      customComponents = with pkgs.unstable.home-assistant-custom-components; [
-        tuya_local
-      ];
-
-      customLovelaceModules = with pkgs.unstable.home-assistant-custom-lovelace-modules; [
-        card-mod
-      ];
-
-      config = {
-        # Includes  sudo ot-ctl router tabledependencies for a basic setup
-        # https://www.home-assistant.io/integrations/default_config/
-        default_config = { };
-        homeassistant = {
-          name = "Home";
-          unit_system = "us_customary";
-          time_zone = "America/Chicago";
-          latitude = "!secret home_latitude";
-          longitude = "!secret home_longitude";
-          elevation = "!secret home_elevation";
+        # ── Automation helpers ──────────────────────────────────────
+        # A `choose` branch that runs when the trigger with `id` fired.
+        onTrigger = id: sequence: {
+          conditions = [
+            {
+              condition = "trigger";
+              inherit id;
+            }
+          ];
+          inherit sequence;
         };
 
-        http = {
-          server_host = "::1";
-          trusted_proxies = [ "::1" ];
-          use_x_forwarded_for = true;
+        # ── Lovelace helpers ────────────────────────────────────────
+        base = "/nixos-lovelace";
+
+        navigate = view: {
+          action = "navigate";
+          navigation_path = "${base}/${view}";
         };
 
-        recorder.db_url = "postgresql://@/hass";
+        centeredHeader = text: {
+          layout = "center";
+          card = {
+            type = "markdown";
+            text_only = true;
+            content = "# ${text}";
+          };
+        };
 
-        lovelace.resource_mode = "yaml";
+        heading = text: {
+          type = "heading";
+          heading = text;
+        };
 
-        frontend.extra_module_url = [
-          "/local/nixos-lovelace-modules/card-mod.js"
+        brightnessTile = entity: {
+          type = "tile";
+          inherit entity;
+          features = [ { type = "light-brightness"; } ];
+        };
+
+        # Big icon-only button on the main view.
+        iconButton =
+          {
+            icon,
+            color,
+            tap_action,
+          }:
+          {
+            type = "button";
+            inherit icon tap_action;
+            show_name = false;
+            show_state = false;
+            state_color = false;
+            grid_options = {
+              columns = 3;
+              rows = 2;
+            };
+            card_mod.style = ''
+              ha-card {
+                --card-mod-icon-color: var(--${color}-color);
+              }
+            '';
+          };
+
+        # Every subview shares these defaults.
+        subview =
+          attrs:
+          {
+            type = "sections";
+            subview = true;
+            back_path = "${base}/main";
+          }
+          // attrs;
+
+        # ── Rooms: one entry generates a main-view tile and a subview ──
+        rooms = [
+          {
+            slug = "aarons-bedroom";
+            name = "Aaron's Bedroom";
+            entity = bedroomLight;
+            icon = "mdi:ceiling-fan-light";
+            badges =
+              lib.mapAttrsToList
+                (kind: label: {
+                  type = "entity";
+                  entity = "sensor.aaron_s_bedroom_sensor_${kind}";
+                  name = "Aaron's Bedroom ${label}";
+                  show_icon = true;
+                  state_content = [ kind ];
+                })
+                {
+                  temperature = "Temperature";
+                  humidity = "Humidity";
+                };
+            extraTiles = [
+              {
+                type = "tile";
+                entity = bedroomFan;
+                icon = "mdi:ceiling-fan";
+                features = [ { type = "toggle"; } ];
+              }
+            ];
+          }
+          {
+            slug = "foyer";
+            name = "Foyer";
+            entity = foyerLight;
+            icon = "mdi:ceiling-light";
+          }
+          {
+            slug = "front-porch";
+            name = "Front Porch";
+            entity = porchLight;
+            icon = "mdi:light-recessed";
+          }
+          {
+            slug = "game-room";
+            name = "Game Room";
+            entity = gameRoomLights;
+            icon = "mdi:controller";
+          }
         ];
 
-        person = [
-          {
-            name = "Aaron";
-            id = "aaron";
-            user_id = "2b109f9a9404405ea29ff64a886fef54";
-            device_trackers = [ "device_tracker.aarons_iphone" ];
-          }
-        ];
+        roomTile = room: {
+          type = "tile";
+          inherit (room) entity icon name;
+          show_state = false;
+          tap_action = navigate "${room.slug}-view";
+        };
 
-        "automation nix" = [
-          {
-            alias = "Porch lights: sunset on, sunrise off";
-            id = "bedroom_light_sun";
-            trigger = [
+        roomView =
+          room:
+          subview {
+            title = "${room.name} View";
+            path = "${room.slug}-view";
+            header = centeredHeader room.name;
+            badges = room.badges or [ ];
+            sections = [
               {
-                platform = "sun";
-                event = "sunset";
-                id = "sunset";
-              }
-              {
-                platform = "sun";
-                event = "sunrise";
-                id = "sunrise";
-              }
-            ];
-            action = [
-              {
-                choose = [
-                  {
-                    conditions = [
-                      {
-                        condition = "trigger";
-                        id = "sunset";
-                      }
-                    ];
-                    sequence = [
-                      {
-                        service = "light.turn_on";
-                        target.entity_id = "light.front_porch_recessed_lights";
-                      }
-                    ];
-                  }
-                  {
-                    conditions = [
-                      {
-                        condition = "trigger";
-                        id = "sunrise";
-                      }
-                    ];
-                    sequence = [
-                      {
-                        service = "light.turn_off";
-                        target.entity_id = "light.front_porch_recessed_lights";
-                      }
-                    ];
-                  }
-                ];
+                type = "grid";
+                cards = [
+                  (heading "Controls")
+                  (brightnessTile room.entity // { inherit (room) icon; })
+                ]
+                ++ room.extraTiles or [ ];
               }
             ];
-          }
-          {
-            alias = "Bedroom: off when Aaron leaves, restore when home";
-            id = "bedroom_away_restore";
-            mode = "queued";
-            trigger = [
-              {
-                platform = "state";
-                entity_id = "person.aaron";
-                from = "home";
-                to = "not_home";
-                for = "00:05:00";
-                id = "left";
-              }
-              {
-                platform = "state";
-                entity_id = "person.aaron";
-                to = "home";
-                id = "arrived";
-              }
-            ];
-            action = [
-              {
-                choose = [
-                  {
-                    conditions = [
-                      {
-                        condition = "trigger";
-                        id = "left";
-                      }
-                    ];
-                    sequence = [
-                      {
-                        service = "scene.create";
-                        data = {
-                          scene_id = "aaron_away_snapshot";
-                          snapshot_entities = [
-                            "light.aaron_s_bedroom_ceiling_fan_light"
-                            "light.aaron_s_bedroom_ceiling_fan"
-                          ];
-                        };
-                      }
-                      {
-                        service = "light.turn_off";
-                        target.entity_id = [
-                          "light.aaron_s_bedroom_ceiling_fan_light"
-                          "light.aaron_s_bedroom_ceiling_fan"
-                        ];
-                      }
-                    ];
-                  }
-                  {
-                    conditions = [
-                      {
-                        condition = "trigger";
-                        id = "arrived";
-                      }
-                      {
-                        condition = "template";
-                        value_template = "{{ states.scene.aaron_away_snapshot is not none }}";
-                      }
-                    ];
-                    sequence = [
-                      {
-                        service = "scene.turn_on";
-                        target.entity_id = "scene.aaron_away_snapshot";
-                      }
-                      {
-                        service = "scene.delete";
-                        target.entity_id = "scene.aaron_away_snapshot";
-                      }
-                    ];
-                  }
-                ];
-              }
-            ];
-          }
-        ];
-        scene = [
-          {
-            id = "aaron_night";
-            name = "Night";
-            icon = "mdi:weather-night";
-            entities = {
-              "light.aaron_s_bedroom_ceiling_fan_light" = "off";
-              "switch.aaron_s_bedroom_ceiling_fan" = "on";
-            };
-          }
-        ];
-      };
+          };
 
-      lovelaceConfig = {
-        title = "Home";
-        views = [
-          {
-            title = "Main dashboard";
-            path = "main";
-            type = "sections";
-            max_columns = 1;
-            dense_section_placement = true;
+        thermostatSection = name: icon: entity: {
+          type = "grid";
+          cards = [
+            ((heading name) // { inherit icon; })
+            {
+              type = "thermostat";
+              inherit entity;
+              name = "${name} Thermostat";
+            }
+          ];
+        };
+      in
+      {
+        age.secrets.hass-secrets = {
+          file = ../../../secrets/hass-secrets.age;
+          path = "/var/lib/hass/secrets.yaml";
+          owner = "hass";
+          group = "hass";
+          mode = "0400";
+        };
 
-            header = {
-              layout = "center";
-              card = {
-                type = "markdown";
-                text_only = true;
-                content = "# Hello, {{ user }}";
-              };
+        services.home-assistant = {
+          enable = true;
+          package = pkgs.unstable.home-assistant;
+
+          extraComponents = [
+            "analytics"
+            "androidtv"
+            "androidtv_remote"
+            "blink"
+            "cast"
+            "ecobee"
+            "google_translate"
+            "homekit_controller"
+            "lutron_caseta"
+            "matter"
+            "met"
+            "otbr"
+            "radio_browser"
+            "thread"
+            "tplink"
+            "shopping_list"
+            "isal" # fast zlib compression
+          ];
+
+          extraPackages = ps: [ ps.psycopg2 ];
+
+          customComponents = [ pkgs.unstable.home-assistant-custom-components.tuya_local ];
+          customLovelaceModules = [ pkgs.unstable.home-assistant-custom-lovelace-modules.card-mod ];
+
+          config = {
+            # https://www.home-assistant.io/integrations/default_config/
+            default_config = { };
+
+            homeassistant = {
+              name = "Home";
+              unit_system = "us_customary";
+              time_zone = "America/Chicago";
+              latitude = "!secret home_latitude";
+              longitude = "!secret home_longitude";
+              elevation = "!secret home_elevation";
             };
 
-            badges = [
-              {
-                type = "entity";
-                entity = "weather.forecast_home";
-                name = "Outside";
-                show_icon = true;
-                state_content = [
-                  "state"
-                  "temperature"
-                ];
-              }
-            ];
-
-            sections = [
-              {
-                type = "grid";
-                cards = [
-                  {
-                    type = "button";
-                    entity = "light.aaron_s_bedroom_ceiling_fan_light";
-                    icon = "mdi:lamps";
-                    show_name = false;
-                    show_state = false;
-                    state_color = false;
-                    grid_options = {
-                      columns = 3;
-                      rows = 2;
-                    };
-                    tap_action = {
-                      action = "navigate";
-                      navigation_path = "/nixos-lovelace/light-view";
-                    };
-                    card_mod.style = ''
-                      ha-card {
-                        --card-mod-icon-color: var(--amber-color);
-                      }
-                    '';
-                  }
-                  {
-                    type = "button";
-                    entity = "light.aaron_s_bedroom_ceiling_fan_light";
-                    icon = "mdi:home-thermometer";
-                    show_name = false;
-                    show_state = false;
-                    state_color = false;
-                    grid_options = {
-                      columns = 3;
-                      rows = 2;
-                    };
-                    tap_action = {
-                      action = "navigate";
-                      navigation_path = "/nixos-lovelace/climate-view";
-                    };
-                    card_mod.style = ''
-                      ha-card {
-                        --card-mod-icon-color: var(--blue-color);
-                      }
-                    '';
-                  }
-                  {
-                    type = "button";
-                    entity = "light.aaron_s_bedroom_ceiling_fan_light";
-                    icon = "mdi:shield-home";
-                    show_name = false;
-                    show_state = false;
-                    state_color = false;
-                    grid_options = {
-                      columns = 3;
-                      rows = 2;
-                    };
-                    tap_action = {
-                      action = "navigate";
-                      navigation_path = "/nixos-lovelace/security-view";
-                    };
-                    card_mod.style = ''
-                      ha-card {
-                        --card-mod-icon-color: var(--red-color);
-                      }
-                    '';
-                  }
-                  {
-                    type = "button";
-                    entity = "scene.night";
-                    icon = "mdi:weather-night";
-                    show_name = false;
-                    show_state = false;
-                    state_color = false;
-                    grid_options = {
-                      columns = 3;
-                      rows = 2;
-                    };
-                    tap_action = {
-                      action = "perform-action";
-                      perform_action = "scene.turn_on";
-                      target.entity_id = "scene.night";
-                    };
-                    card_mod.style = ''
-                      ha-card {
-                        --card-mod-icon-color: var(--indigo-color);
-                      }
-                    '';
-                  }
-                ];
-              }
-              {
-                type = "grid";
-                cards = [
-                  {
-                    type = "heading";
-                    heading = "Rooms";
-                  }
-                  {
-                    type = "tile";
-                    entity = "light.aaron_s_bedroom_ceiling_fan_light";
-                    icon = "mdi:ceiling-fan-light";
-                    name = "Aaron's Bedroom";
-                    show_state = false;
-                    tap_action = {
-                      action = "navigate";
-                      navigation_path = "/nixos-lovelace/aarons-bedroom-view";
-                    };
-                  }
-                  {
-                    type = "tile";
-                    entity = "light.foyer_ceiling_light";
-                    icon = "mdi:ceiling-light";
-                    name = "Foyer";
-                    show_state = false;
-                    tap_action = {
-                      action = "navigate";
-                      navigation_path = "/nixos-lovelace/foyer-view";
-                    };
-                  }
-                  {
-                    type = "tile";
-                    entity = "light.front_porch_recessed_lights";
-                    icon = "mdi:light-recessed";
-                    name = "Front Porch";
-                    show_state = false;
-                    tap_action = {
-                      action = "navigate";
-                      navigation_path = "/nixos-lovelace/front-porch-view";
-                    };
-                  }
-                ];
-              }
-            ];
-          }
-          {
-            title = "Light View";
-            path = "light-view";
-            type = "sections";
-            subview = true;
-            back_path = "/nixos-lovelace/main";
-
-            sections = [
-              {
-                type = "grid";
-                cards = [
-                  {
-                    type = "tile";
-                    entity = "light.aaron_s_bedroom_ceiling_fan_light";
-                    features = [ { type = "light-brightness"; } ];
-                  }
-                  {
-                    type = "tile";
-                    entity = "light.foyer_ceiling_light";
-                    features = [ { type = "light-brightness"; } ];
-                  }
-                  {
-                    type = "tile";
-                    entity = "light.front_porch_recessed_lights";
-                    features = [ { type = "light-brightness"; } ];
-                  }
-                  {
-                    type = "tile";
-                    entity = "light.aaron_s_closet_dimmer_switch";
-                    features = [ { type = "light-brightness"; } ];
-                  }
-                ];
-              }
-            ];
-          }
-          {
-            title = "Climate View";
-            path = "climate-view";
-            type = "sections";
-            subview = true;
-            back_path = "/nixos-lovelace/main";
-
-            sections = [
-              {
-                type = "grid";
-                cards = [
-                  {
-                    type = "heading";
-                    heading = "2nd Floor";
-                    icon = "mdi:home-floor-2";
-                  }
-                  {
-                    type = "thermostat";
-                    entity = "climate.hallway_thermostat";
-                    name = "2nd Floor Thermostat";
-                  }
-                ];
-              }
-              {
-                type = "grid";
-                cards = [
-                  {
-                    type = "heading";
-                    heading = "Attic";
-                    icon = "mdi:home-floor-a";
-                  }
-                  {
-                    type = "thermostat";
-                    entity = "climate.attic_thermostat";
-                    name = "Attic Thermostat";
-                  }
-                ];
-              }
-            ];
-          }
-          {
-            title = "Security View";
-            path = "security-view";
-            type = "sections";
-            subview = true;
-            back_path = "/nixos-lovelace/main";
-
-            sections = [
-              {
-                type = "grid";
-              }
-            ];
-          }
-          {
-            title = "Aaron's Bedroom View";
-            path = "aarons-bedroom-view";
-            type = "sections";
-            subview = true;
-            back_path = "/nixos-lovelace/main";
-
-            header = {
-              layout = "center";
-              card = {
-                type = "markdown";
-                text_only = true;
-                content = "# Aaron's Bedroom";
-              };
+            http = {
+              server_host = "::1";
+              trusted_proxies = [ "::1" ];
+              use_x_forwarded_for = true;
             };
 
-            badges = [
+            recorder.db_url = "postgresql://@/hass";
+            lovelace.resource_mode = "yaml";
+            frontend.extra_module_url = [ "/local/nixos-lovelace-modules/card-mod.js" ];
+
+            person = [
               {
-                type = "entity";
-                entity = "sensor.aaron_s_bedroom_sensor_temperature";
-                name = "Aaron's Bedroom Temperature";
-                show_icon = true;
-                state_content = [
-                  "temperature"
-                ];
-              }
-              {
-                type = "entity";
-                entity = "sensor.aaron_s_bedroom_sensor_humidity";
-                name = "Aaron's Bedroom Humidity";
-                show_icon = true;
-                state_content = [
-                  "humidity"
-                ];
+                name = "Aaron";
+                id = "aaron";
+                user_id = "2b109f9a9404405ea29ff64a886fef54";
+                device_trackers = [ "device_tracker.aarons_iphone" ];
               }
             ];
 
-            sections = [
+            "automation nix" = [
               {
-                type = "grid";
-                cards = [
+                alias = "Porch lights: sunset on, sunrise off";
+                id = "bedroom_light_sun"; # kept so HA history/traces stay linked
+                trigger =
+                  map
+                    (event: {
+                      platform = "sun";
+                      inherit event;
+                      id = event;
+                    })
+                    [
+                      "sunset"
+                      "sunrise"
+                    ];
+                action = [
                   {
-                    type = "heading";
-                    heading = "Controls";
-                  }
-                  {
-                    type = "tile";
-                    entity = "light.aaron_s_bedroom_ceiling_fan_light";
-                    icon = "mdi:ceiling-fan-light";
-                    features = [ { type = "light-brightness"; } ];
-                  }
-                  {
-                    type = "tile";
-                    entity = "switch.aaron_s_bedroom_ceiling_fan";
-                    icon = "mdi:ceiling-fan";
-                    features = [ { type = "toggle"; } ];
+                    choose = [
+                      (onTrigger "sunset" [
+                        {
+                          service = "light.turn_on";
+                          target.entity_id = porchLight;
+                        }
+                      ])
+                      (onTrigger "sunrise" [
+                        {
+                          service = "light.turn_off";
+                          target.entity_id = porchLight;
+                        }
+                      ])
+                    ];
                   }
                 ];
               }
-            ];
-          }
-          {
-            title = "Foyer View";
-            path = "foyer-view";
-            type = "sections";
-            subview = true;
-            back_path = "/nixos-lovelace/main";
 
-            header = {
-              layout = "center";
-              card = {
-                type = "markdown";
-                text_only = true;
-                content = "# Foyer";
-              };
+              (
+                let
+                  awayEntities = [
+                    bedroomLight
+                    bedroomFan
+                  ];
+                  snapshot = "scene.aaron_away_snapshot";
+                in
+                {
+                  alias = "Bedroom: off when Aaron leaves, restore when home";
+                  id = "bedroom_away_restore";
+                  mode = "queued";
+                  trigger = [
+                    {
+                      platform = "state";
+                      entity_id = "person.aaron";
+                      from = "home";
+                      to = "not_home";
+                      for = "00:05:00";
+                      id = "left";
+                    }
+                    {
+                      platform = "state";
+                      entity_id = "person.aaron";
+                      to = "home";
+                      id = "arrived";
+                    }
+                  ];
+                  action = [
+                    {
+                      choose = [
+                        (onTrigger "left" [
+                          {
+                            service = "scene.create";
+                            data = {
+                              scene_id = "aaron_away_snapshot";
+                              snapshot_entities = awayEntities;
+                            };
+                          }
+                          # homeassistant.turn_off works for both the light and the switch
+                          {
+                            service = "homeassistant.turn_off";
+                            target.entity_id = awayEntities;
+                          }
+                        ])
+                        (onTrigger "arrived" [
+                          # A condition inside a sequence stops it when false.
+                          {
+                            condition = "template";
+                            value_template = "{{ states.${snapshot} is not none }}";
+                          }
+                          {
+                            service = "scene.turn_on";
+                            target.entity_id = snapshot;
+                          }
+                          {
+                            service = "scene.delete";
+                            target.entity_id = snapshot;
+                          }
+                        ])
+                      ];
+                    }
+                  ];
+                }
+              )
+            ];
+
+            scene = [
+              {
+                id = "aaron_night";
+                name = "Night";
+                icon = "mdi:weather-night";
+                entities = {
+                  ${bedroomLight} = "off";
+                  ${bedroomFan} = "on";
+                };
+              }
+            ];
+          };
+
+          lovelaceConfig = {
+            title = "Home";
+            views = [
+              {
+                title = "Main dashboard";
+                path = "main";
+                type = "sections";
+                max_columns = 1;
+                dense_section_placement = true;
+                header = centeredHeader "Hello, {{ user }}";
+
+                badges = [
+                  {
+                    type = "entity";
+                    entity = "weather.forecast_home";
+                    name = "Outside";
+                    show_icon = true;
+                    state_content = [
+                      "state"
+                      "temperature"
+                    ];
+                  }
+                ];
+
+                sections = [
+                  {
+                    type = "grid";
+                    cards = [
+                      (iconButton {
+                        icon = "mdi:lamps";
+                        color = "amber";
+                        tap_action = navigate "light-view";
+                      })
+                      (iconButton {
+                        icon = "mdi:home-thermometer";
+                        color = "blue";
+                        tap_action = navigate "climate-view";
+                      })
+                      (iconButton {
+                        icon = "mdi:shield-home";
+                        color = "red";
+                        tap_action = navigate "security-view";
+                      })
+                      (
+                        iconButton {
+                          icon = "mdi:weather-night";
+                          color = "indigo";
+                          tap_action.action = "toggle"; # toggling a scene activates it
+                        }
+                        // {
+                          entity = "scene.night";
+                        }
+                      )
+                    ];
+                  }
+                  {
+                    type = "grid";
+                    cards = [ (heading "Rooms") ] ++ map roomTile rooms;
+                  }
+                ];
+              }
+
+              (subview {
+                title = "Light View";
+                path = "light-view";
+                sections = [
+                  {
+                    type = "grid";
+                    cards = map brightnessTile [
+                      bedroomLight
+                      foyerLight
+                      porchLight
+                      closetLight
+                    ];
+                  }
+                ];
+              })
+
+              (subview {
+                title = "Climate View";
+                path = "climate-view";
+                sections = [
+                  (thermostatSection "2nd Floor" "mdi:home-floor-2" "climate.hallway_thermostat")
+                  (thermostatSection "Attic" "mdi:home-floor-a" "climate.attic_thermostat")
+                ];
+              })
+
+              (subview {
+                title = "Security View";
+                path = "security-view";
+                sections = [ { type = "grid"; } ];
+              })
+            ]
+            ++ map roomView rooms;
+          };
+        };
+
+        services.nginx = {
+          recommendedProxySettings = true;
+          virtualHosts."home.amdlift.com" = {
+            forceSSL = true;
+            enableACME = true;
+            extraConfig = "proxy_buffering off;";
+            locations."/" = {
+              proxyPass = "http://[::1]:8123";
+              proxyWebsockets = true;
             };
+          };
+        };
 
-            sections = [
-              {
-                type = "grid";
-                cards = [
-                  {
-                    type = "heading";
-                    heading = "Controls";
-                  }
-                  {
-                    type = "tile";
-                    entity = "light.foyer_ceiling_light";
-                    icon = "mdi:ceiling-light";
-                    features = [ { type = "light-brightness"; } ];
-                  }
-                ];
-              }
-            ];
-          }
-          {
-            title = "Front Porch View";
-            path = "front-porch-view";
-            type = "sections";
-            subview = true;
-            back_path = "/nixos-lovelace/main";
-
-            header = {
-              layout = "center";
-              card = {
-                type = "markdown";
-                text_only = true;
-                content = "# Front Porch";
-              };
-            };
-
-            sections = [
-              {
-                type = "grid";
-                cards = [
-                  {
-                    type = "heading";
-                    heading = "Controls";
-                  }
-                  {
-                    type = "tile";
-                    entity = "light.front_porch_recessed_lights";
-                    icon = "mdi:light-recessed";
-                    features = [ { type = "light-brightness"; } ];
-                  }
-                ];
-              }
-            ];
-          }
-        ];
-      };
-    };
-
-    services.nginx = {
-      recommendedProxySettings = true;
-      virtualHosts."home.amdlift.com" = {
-        forceSSL = true;
-        enableACME = true;
-        extraConfig = ''
-          proxy_buffering off;
-        '';
-        locations."/" = {
-          proxyPass = "http://[::1]:8123";
-          proxyWebsockets = true;
+        services.postgresql = {
+          enable = true;
+          ensureDatabases = [ "hass" ];
+          ensureUsers = [
+            {
+              name = "hass";
+              ensureDBOwnership = true;
+            }
+          ];
         };
       };
-    };
-
-    services.postgresql = {
-      enable = true;
-      ensureDatabases = [ "hass" ];
-      ensureUsers = [
-        {
-          name = "hass";
-          ensureDBOwnership = true;
-        }
-      ];
-    };
   };
 }
