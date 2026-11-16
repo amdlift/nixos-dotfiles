@@ -18,6 +18,7 @@
       extraComponents = [
         # Components required to complete the onboarding
         "analytics"
+        "androidtv"
         "androidtv_remote"
         "blink"
         "cast"
