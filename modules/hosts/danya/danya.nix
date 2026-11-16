@@ -76,6 +76,15 @@
         };
       };
 
+      services.nginx.virtualHosts."semester.amdlift.com" = {
+        enableACME = true; # get a Let's Encrypt cert
+        forceSSL = true; # redirect http -> https
+        locations."/" = {
+          proxyPass = "http://192.168.1.211:8001";
+          proxyWebsockets = true; # harmless if the app doesn't use them
+        };
+      };
+
       hardware.nvidia.open = false;
       hardware.nvidia.branch = "legacy_580";
     };

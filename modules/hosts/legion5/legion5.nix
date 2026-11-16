@@ -82,7 +82,20 @@
         drivers = with pkgs; [
           epson-escpr2 # newer EcoTanks
           epson-escpr # fallback; harmless to include both
+          gutenprint
         ];
+      };
+
+      hardware.printers = {
+        ensurePrinters = [
+          {
+            name = "Canon_Pro9000_MkII";
+            location = "Home";
+            deviceUri = "usb://Canon/Pro9000II%20series?serial=20382B";
+            model = "gutenprint.5.3://bjc-PIXMA-Pro9000mk2/expert";
+          }
+        ];
+        ensureDefaultPrinter = "Canon_Pro9000_MkII";
       };
 
       # Network printer discovery (for Wi-Fi)
