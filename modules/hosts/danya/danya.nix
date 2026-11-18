@@ -80,7 +80,7 @@
         enableACME = true; # get a Let's Encrypt cert
         forceSSL = true; # redirect http -> https
         locations."/" = {
-          proxyPass = "http://192.168.1.211:5173";
+          proxyPass = "http://192.168.1.192:5173";
           proxyWebsockets = true; # harmless if the app doesn't use them
         };
       };
