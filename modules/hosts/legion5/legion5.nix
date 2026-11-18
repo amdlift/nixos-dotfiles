@@ -16,6 +16,7 @@
       ssh
       stylix
       systemd-boot
+      tailscale
       unstable
       usb
       zen-browser
