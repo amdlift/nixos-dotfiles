@@ -1,6 +1,6 @@
 {
-  den.aspects.danya._.calibre.nixos = {
-    environment.systemPackages = [ pkgs.calibre ];  # provides calibredb for the import
+  den.aspects.danya._.calibre.nixos = { pkgs, ... }: {
+    environment.systemPackages = [ pkgs.calibre ]; # provides calibredb for the import
 
     services.calibre-server = {
       enable = true;
