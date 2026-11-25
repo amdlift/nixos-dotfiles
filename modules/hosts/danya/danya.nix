@@ -14,6 +14,7 @@
       unstable
       usb
 
+      danya._.calibre
       danya._.home-assistant
       danya._.immich
       danya._.minecraft-server
