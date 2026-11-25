@@ -16,7 +16,6 @@
       ssh
       stylix
       systemd-boot
-      tailscale
       unstable
       usb
       zen-browser
@@ -51,6 +50,7 @@
         jq
         logseq
         ollama-cuda
+        pinokio
         podman-compose
         prismlauncher
         qgroundcontrol
@@ -105,6 +105,11 @@
         nssmdns4 = true;
         openFirewall = true;
       };
+
+      services.udev.packages = with pkgs; [ 
+        platformio-core.udev
+        openocd
+      ];
 
       time.timeZone = "America/Chicago";
 
