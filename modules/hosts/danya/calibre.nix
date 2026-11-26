@@ -12,6 +12,9 @@
     };
 
     services.calibre-web = {
+      package = pkgs.calibre-web.overridePythonAttrs (old: {
+        dependencies = old.dependencies ++ old.optional-dependencies.kobo;
+      });
       enable = true;
       group = "media";
       listen.ip = "0.0.0.0";
