@@ -24,7 +24,7 @@
       };
     };
 
-    virtualHosts."calibre.amdlift.com" = {
+    services.nginx.virtualHosts."calibre.amdlift.com" = {
       enableACME = true;
       forceSSL = true;
       locations."/" = {
