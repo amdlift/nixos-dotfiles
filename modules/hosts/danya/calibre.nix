@@ -23,5 +23,19 @@
         enableKepubify = true;
       };
     };
+
+    virtualHosts."calibre.amdlift.com" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:8091";
+        extraConfig = ''
+          client_max_body_size 500M;
+          proxy_buffer_size 128k;
+          proxy_buffers 4 256k;
+          proxy_busy_buffers_size 256k;
+        '';
+      };
+    };
   };
 }
