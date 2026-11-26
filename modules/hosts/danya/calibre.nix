@@ -15,7 +15,7 @@
       enable = true;
       group = "media";
       listen.ip = "0.0.0.0";
-      listen.port = 8083;
+      listen.port = 8091;
       openFirewall = true;
       options = {
         calibreLibrary = "/zfspool/media/CalibreLibrary";
