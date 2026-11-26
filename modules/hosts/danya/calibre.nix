@@ -10,5 +10,18 @@
       openFirewall = true;
       group = "media";
     };
+
+    services.calibre-web = {
+      enable = true;
+      group = "media";
+      listen.ip = "0.0.0.0";
+      listen.port = 8083;
+      openFirewall = true;
+      options = {
+        calibreLibrary = "/zfspool/media/CalibreLibrary";
+        enableBookUploading = true;
+        enableKepubify = true;
+      };
+    };
   };
 }
